@@ -23,9 +23,9 @@ const heading4 = document.getElementById('heading-4');
 
 // Functions
 
-// let clicksPerSecond = setInterval(() => {
-//   clicks += cps;
-// }, 1000);
+let clicksPerSecond = setInterval(() => {
+  clicks += cps;
+}, 1000);
 
 let updateGame = setInterval(() => {
   if (clicks % 1 !== 0) {
