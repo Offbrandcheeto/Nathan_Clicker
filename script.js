@@ -28,40 +28,56 @@ let clicksPerSecond = setInterval(() => {
 }, 1000);
 
 let updateGame = setInterval(() => {
-  if (clicks % 1 !== 0) {
-    clickCount.textContent = `Stoned Score: ${clicks.toFixed(1)}`;
+  if (Number.isInteger(clicks)) {
+    clickCount.textContent = `Stoned Score: ${Math.trunc(clicks)}`;
   } else {
-    clickCount.textContent = `Stoned Score: ${clicks}`;
+    clickCount.textContent = `Stoned Score: ${Math.round(clicks * 10) / 10}`;
   }
 
-  if (cps % 1 !== 0) {
-    cpsCount.textContent = `Per Second: ${cps.toFixed(1)}`;
+  if (Number.isInteger(cps)) {
+    cpsCount.textContent = `Per Second: ${Math.trunc(cps)}`;
   } else {
-    cpsCount.textContent = `Per Second: ${cps}`;
+    cpsCount.textContent = `Per Second: ${Math.round(cps * 10) / 10}`;
   }
 
-  if (itemOnePrice % 1 !== 0) {
-    heading1.textContent = `Cost: ${itemOnePrice.toFixed(1)} | +0.1 Sec`;
+  if (Number.isInteger(itemOnePrice)) {
+    heading1.textContent = `Cost: ${Math.trunc(itemOnePrice)} | +0.1 Sec`;
   } else {
-    heading1.textContent = `Cost: ${itemOnePrice} | +0.1 Sec`;
+    heading1.textContent = `Cost: ${
+      Math.round(itemOnePrice * 10) / 10
+    } | +0.1 Sec`;
   }
 
-  if (itemTwoPrice % 1 !== 0) {
-    heading2.textContent = `Cost: ${itemTwoPrice.toFixed(1)} | +1 Sec`;
+  // Test
+
+  if (Number.isInteger(itemTwoPrice)) {
+    heading2.textContent = `Cost: ${Math.trunc(itemTwoPrice)} | +1 Sec`;
   } else {
-    heading2.textContent = `Cost: ${itemTwoPrice} | +1 Sec`;
+    heading2.textContent = `Cost: ${
+      Math.round(itemTwoPrice * 10) / 10
+    } | +1 Sec`;
   }
 
-  if (itemThreePrice % 1 !== 0) {
-    heading3.textContent = `Cost: ${itemThreePrice.toFixed(1)} | +5 Sec`;
+  // End Test
+
+  if (Number.isInteger(itemThreePrice)) {
+    heading3.textContent = `Cost: ${Math.trunc(itemThreePrice)} | +5 Sec`;
   } else {
-    heading3.textContent = `Cost: ${itemThreePrice} | +5 Sec`;
+    heading3.textContent = `Cost: ${
+      Math.round(itemThreePrice * 10) / 10
+    } | +5 Sec`;
   }
 
-  if (itemFourPrice % 1 !== 0) {
-    heading4.textContent = `Cost: ${itemFourPrice.toFixed(1)} | +15 Sec`;
+  if (Number.isInteger(itemFourPrice)) {
+    heading4.textContent = `Cost: ${Math.trunc(itemFourPrice)} | +15 Sec`;
   } else {
-    heading4.textContent = `Cost: ${itemFourPrice} | +15 Sec`;
+    heading4.textContent = `Cost: ${
+      Math.round(itemFourPrice * 10) / 10
+    } | +15 Sec`;
+  }
+
+  if (clicks >= 100) {
+    clickCount.textContent = `Stoned Score: ${Math.round(clicks)}`;
   }
 }, 10);
 
