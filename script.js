@@ -48,8 +48,6 @@ let updateGame = setInterval(() => {
     } | +0.1 Sec`;
   }
 
-  // Test
-
   if (Number.isInteger(itemTwoPrice)) {
     heading2.textContent = `Cost: ${Math.trunc(itemTwoPrice)} | +1 Sec`;
   } else {
@@ -57,8 +55,6 @@ let updateGame = setInterval(() => {
       Math.round(itemTwoPrice * 10) / 10
     } | +1 Sec`;
   }
-
-  // End Test
 
   if (Number.isInteger(itemThreePrice)) {
     heading3.textContent = `Cost: ${Math.trunc(itemThreePrice)} | +5 Sec`;
@@ -83,6 +79,10 @@ let updateGame = setInterval(() => {
 
 function mainFunction() {
   clicks++;
+  mainElement.classList.add('animate');
+  setTimeout(() => {
+    mainElement.classList.remove('animate');
+  }, 100);
 }
 
 function buyItemOne() {
