@@ -22,14 +22,14 @@ body {
   color: var(--dark-color);
 }
 
-.p {
-  padding: 1rem;
-}
-
 .heading {
   text-transform: uppercase;
   font-weight: bold;
   color: var(--dark-color);
+}
+
+.bitch {
+  padding: 1.5rem;
 }
 
 /* Navbar */
@@ -49,6 +49,7 @@ nav {
 }
 
 .nav-link {
+  cursor: default;
   font-size: 1.5rem;
   text-decoration: none;
   color: var(--dark-color);
@@ -103,7 +104,7 @@ i {
 
 .main-element {
   cursor: pointer;
-  width: 25rem;
+  width: 22rem;
 }
 
 /* Animation */
@@ -152,7 +153,7 @@ i {
     border-bottom: none;
   }
 
-  /* Nav & Heading */
+  /* Nav */
 
   nav {
     height: 100%;
@@ -167,8 +168,14 @@ i {
     font-size: 1.2rem;
   }
 
+  /* Headings */
+
   .heading {
     margin-bottom: 1rem;
+  }
+
+  .bitch {
+    padding: 0;
   }
 
   /* Animation */

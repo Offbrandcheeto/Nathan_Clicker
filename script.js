@@ -10,7 +10,14 @@ let itemTwoPrice = 100;
 let itemThreePrice = 500;
 let itemFourPrice = 2500;
 
+let numberOfOne = 0;
+let numberOfTwo = 0;
+let numberOfThree = 0;
+let numberOfFour = 0;
+
 // Const
+
+const multiplier = 1.15;
 
 const mainElement = document.getElementById('main-element');
 const clickCount = document.getElementById('click-count');
@@ -89,7 +96,8 @@ function buyItemOne() {
   if (clicks >= itemOnePrice) {
     clicks -= itemOnePrice;
     cps += 0.1;
-    itemOnePrice *= 1.15;
+    itemOnePrice *= multiplier;
+    numberOfOne++;
   }
 }
 
@@ -97,7 +105,8 @@ function buyItemTwo() {
   if (clicks >= itemTwoPrice) {
     clicks -= itemTwoPrice;
     cps++;
-    itemTwoPrice *= 1.15;
+    itemTwoPrice *= multiplier;
+    numberOfTwo++;
   }
 }
 
@@ -105,7 +114,8 @@ function buyItemThree() {
   if (clicks >= itemThreePrice) {
     clicks -= itemThreePrice;
     cps += 5;
-    itemThreePrice *= 1.15;
+    itemThreePrice *= multiplier;
+    numberOfThree++;
   }
 }
 
@@ -113,7 +123,8 @@ function buyItemFour() {
   if (clicks >= itemFourPrice) {
     clicks -= itemFourPrice;
     cps += 15;
-    itemFourPrice *= 1.15;
+    itemFourPrice *= multiplier;
+    numberOfFour++;
   }
 }
 
