@@ -170,4 +170,16 @@ i {
   .heading {
     margin-bottom: 1rem;
   }
+
+  /* Animation */
+
+  @keyframes animate {
+    to {
+      transform: scale(1);
+    }
+
+    from {
+      transform: scale(1.1);
+    }
+  }
 }
