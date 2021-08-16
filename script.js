@@ -10,11 +10,6 @@ let itemTwoPrice = 100;
 let itemThreePrice = 500;
 let itemFourPrice = 2500;
 
-let numberOfOne = 0;
-let numberOfTwo = 0;
-let numberOfThree = 0;
-let numberOfFour = 0;
-
 // Const
 
 const multiplier = 1.15;
@@ -28,23 +23,66 @@ const heading2 = document.getElementById('heading-2');
 const heading3 = document.getElementById('heading-3');
 const heading4 = document.getElementById('heading-4');
 
-// Functions
+// Local Storage
 
-let clicksPerSecond = setInterval(() => {
+populateUI();
+
+function populateUI() {
+  if (localStorage.getItem('savedClicks')) {
+    clicks = JSON.parse(localStorage.getItem('savedClicks'));
+  }
+
+  if (localStorage.getItem('savedCPS')) {
+    cps = JSON.parse(localStorage.getItem('savedCPS'));
+  }
+
+  if (localStorage.getItem('savedItemOne')) {
+    itemOnePrice = JSON.parse(localStorage.getItem('savedItemOne'));
+  }
+
+  if (localStorage.getItem('savedItemTwo')) {
+    itemTwoPrice = JSON.parse(localStorage.getItem('savedItemTwo'));
+  }
+
+  if (localStorage.getItem('savedItemThree')) {
+    itemThreePrice = JSON.parse(localStorage.getItem('savedItemThree'));
+  }
+
+  if (localStorage.getItem('savedItemFour')) {
+    itemFourPrice = JSON.parse(localStorage.getItem('savedItemFour'));
+  }
+}
+
+const updateLocalStorage = setInterval(() => {
+  updateStorage();
+}, 1000);
+
+function updateStorage() {
+  localStorage.setItem('savedClicks', JSON.stringify(clicks));
+  localStorage.setItem('savedCPS', JSON.stringify(cps));
+  localStorage.setItem('savedItemOne', JSON.stringify(itemOnePrice));
+  localStorage.setItem('savedItemTwo', JSON.stringify(itemTwoPrice));
+  localStorage.setItem('savedItemThree', JSON.stringify(itemThreePrice));
+  localStorage.setItem('savedItemFour', JSON.stringify(itemFourPrice));
+}
+
+// Intervals
+
+const clicksPerSecond = setInterval(() => {
   clicks += cps;
 }, 1000);
 
-let updateGame = setInterval(() => {
-  if (Number.isInteger(clicks)) {
-    clickCount.textContent = `Stoned Score: ${Math.trunc(clicks)}`;
-  } else {
-    clickCount.textContent = `Stoned Score: ${Math.round(clicks * 10) / 10}`;
-  }
-
+const updateGame = setInterval(() => {
   if (Number.isInteger(cps)) {
     cpsCount.textContent = `Per Second: ${Math.trunc(cps)}`;
   } else {
     cpsCount.textContent = `Per Second: ${Math.round(cps * 10) / 10}`;
+  }
+
+  if (Number.isInteger(clicks)) {
+    clickCount.textContent = `Stoned Score: ${Math.trunc(clicks)}`;
+  } else {
+    clickCount.textContent = `Stoned Score: ${Math.round(clicks * 10) / 10}`;
   }
 
   if (Number.isInteger(itemOnePrice)) {
@@ -80,9 +118,23 @@ let updateGame = setInterval(() => {
   }
 
   if (clicks >= 100) {
-    clickCount.textContent = `Stoned Score: ${Math.round(clicks)}`;
+    clickCount.textContent = `Stoned Score: ${Math.trunc(clicks)}`;
   }
 }, 10);
+
+// Functions
+
+function clearGame() {
+  clicks = 0;
+  cps = 0;
+
+  itemOnePrice = 10;
+  itemTwoPrice = 100;
+  itemThreePrice = 500;
+  itemFourPrice = 2500;
+
+  localStorage.clear();
+}
 
 function mainFunction() {
   clicks++;
@@ -97,7 +149,6 @@ function buyItemOne() {
     clicks -= itemOnePrice;
     cps += 0.1;
     itemOnePrice *= multiplier;
-    numberOfOne++;
   }
 }
 
@@ -106,7 +157,6 @@ function buyItemTwo() {
     clicks -= itemTwoPrice;
     cps++;
     itemTwoPrice *= multiplier;
-    numberOfTwo++;
   }
 }
 
@@ -115,7 +165,6 @@ function buyItemThree() {
     clicks -= itemThreePrice;
     cps += 5;
     itemThreePrice *= multiplier;
-    numberOfThree++;
   }
 }
 
@@ -124,7 +173,6 @@ function buyItemFour() {
     clicks -= itemFourPrice;
     cps += 15;
     itemFourPrice *= multiplier;
-    numberOfFour++;
   }
 }
 
@@ -136,3 +184,9 @@ item1.addEventListener('click', buyItemOne);
 item2.addEventListener('click', buyItemTwo);
 item3.addEventListener('click', buyItemThree);
 item4.addEventListener('click', buyItemFour);
+
+document.addEventListener('keydown', function (e) {
+  if (e.key === ' ') {
+    clearGame();
+  }
+});
