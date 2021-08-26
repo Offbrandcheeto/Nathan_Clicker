@@ -10,6 +10,11 @@ let itemTwoPrice = 100;
 let itemThreePrice = 500;
 let itemFourPrice = 2500;
 
+let itemOneNumber = 0;
+let itemTwoNumber = 0;
+let itemThreeNumber = 0;
+let itemFourNumber = 0;
+
 // Const
 
 const multiplier = 1.15;
@@ -23,6 +28,11 @@ const heading1 = document.getElementById('heading-1');
 const heading2 = document.getElementById('heading-2');
 const heading3 = document.getElementById('heading-3');
 const heading4 = document.getElementById('heading-4');
+
+const number1 = document.getElementById('number-1');
+const number2 = document.getElementById('number-2');
+const number3 = document.getElementById('number-3');
+const number4 = document.getElementById('number-4');
 
 // Local Storage
 
@@ -52,6 +62,22 @@ function populateUI() {
   if (localStorage.getItem('savedItemFour')) {
     itemFourPrice = JSON.parse(localStorage.getItem('savedItemFour'));
   }
+
+  if (localStorage.getItem('savedNumberOne')) {
+    itemOneNumber = JSON.parse(localStorage.getItem('savedNumberOne'));
+  }
+
+  if (localStorage.getItem('savedNumberTwo')) {
+    itemTwoNumber = JSON.parse(localStorage.getItem('savedNumberTwo'));
+  }
+
+  if (localStorage.getItem('savedNumberThree')) {
+    itemThreeNumber = JSON.parse(localStorage.getItem('savedNumberThree'));
+  }
+
+  if (localStorage.getItem('savedNumberFour')) {
+    itemFourNumber = JSON.parse(localStorage.getItem('savedNumberFour'));
+  }
 }
 
 const updateLocalStorage = setInterval(() => {
@@ -65,6 +91,10 @@ function updateStorage() {
   localStorage.setItem('savedItemTwo', JSON.stringify(itemTwoPrice));
   localStorage.setItem('savedItemThree', JSON.stringify(itemThreePrice));
   localStorage.setItem('savedItemFour', JSON.stringify(itemFourPrice));
+  localStorage.setItem('savedNumberOne', JSON.stringify(itemOneNumber));
+  localStorage.setItem('savedNumberTwo', JSON.stringify(itemTwoNumber));
+  localStorage.setItem('savedNumberThree', JSON.stringify(itemThreeNumber));
+  localStorage.setItem('savedNumberFour', JSON.stringify(itemFourNumber));
 }
 
 // Intervals
@@ -79,12 +109,14 @@ const updateGame = setInterval(() => {
   clickCount.textContent = `Stoned Score: ${Math.floor(clicks)}`;
 
   heading1.textContent = `Cost: ${itemOnePrice} | +0.1 Sec`;
-
   heading2.textContent = `Cost: ${itemTwoPrice} | +1 Sec`;
-
   heading3.textContent = `Cost: ${itemThreePrice} | +5 Sec`;
-
   heading4.textContent = `Cost: ${itemFourPrice} | +15 Sec`;
+
+  number1.textContent = `${itemOneNumber}`;
+  number2.textContent = `${itemTwoNumber}`;
+  number3.textContent = `${itemThreeNumber}`;
+  number4.textContent = `${itemFourNumber}`;
 }, 10);
 
 // Functions
@@ -97,6 +129,11 @@ function clearGame() {
   itemTwoPrice = 100;
   itemThreePrice = 500;
   itemFourPrice = 2500;
+
+  itemOneNumber = 0;
+  itemTwoNumber = 0;
+  itemThreeNumber = 0;
+  itemFourNumber = 0;
 
   localStorage.clear();
 }
@@ -117,6 +154,7 @@ function buyItemOne() {
     cps += 0.1;
     itemOnePrice *= multiplier;
     itemOnePrice = Math.round(itemOnePrice);
+    itemOneNumber++;
   }
 }
 
@@ -126,6 +164,7 @@ function buyItemTwo() {
     cps++;
     itemTwoPrice *= multiplier;
     itemTwoPrice = Math.round(itemTwoPrice);
+    itemTwoNumber++;
   }
 }
 
@@ -135,6 +174,7 @@ function buyItemThree() {
     cps += 5;
     itemThreePrice *= multiplier;
     itemThreePrice = Math.round(itemThreePrice);
+    itemThreeNumber++;
   }
 }
 
@@ -144,6 +184,7 @@ function buyItemFour() {
     cps += 15;
     itemFourPrice *= multiplier;
     itemFourPrice = Math.round(itemFourPrice);
+    itemFourNumber++;
   }
 }
 
