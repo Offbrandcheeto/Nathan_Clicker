@@ -17,6 +17,7 @@ const multiplier = 1.15;
 const mainElement = document.getElementById('main-element');
 const clickCount = document.getElementById('click-count');
 const cpsCount = document.getElementById('cps-count');
+const clickAnimation = document.getElementById('click-animation');
 
 const heading1 = document.getElementById('heading-1');
 const heading2 = document.getElementById('heading-2');
@@ -103,8 +104,10 @@ function clearGame() {
 function mainFunction() {
   clicks++;
   mainElement.classList.add('animate');
+  clickAnimation.classList.remove('hidden');
   setTimeout(() => {
     mainElement.classList.remove('animate');
+    clickAnimation.classList.add('hidden');
   }, 100);
 }
 

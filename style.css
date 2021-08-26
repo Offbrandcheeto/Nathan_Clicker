@@ -70,6 +70,7 @@ nav {
 
 .item {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -127,8 +128,33 @@ i {
   }
 }
 
+@keyframes hidden {
+  to {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.click-animation {
+  opacity: 0;
+  position: absolute;
+  top: 1rem;
+  color: var(--dark-color);
+  font-size: 3rem;
+  z-index: 5;
+}
+
 .animate {
   animation: animate 0.1s ease;
+}
+
+.hidden {
+  animation: hidden 0.1s ease;
 }
 
 /* Responsive */
@@ -208,5 +234,10 @@ i {
     from {
       transform: scale(1.1);
     }
+  }
+
+  .click-animation {
+    top: 0;
+    font-size: 2rem;
   }
 }
