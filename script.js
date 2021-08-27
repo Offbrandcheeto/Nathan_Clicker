@@ -215,7 +215,7 @@ function buyItemFour() {
 }
 
 function newSkin() {
-  if (clicks >= 0) {
+  if (clicks >= 250) {
     clicks -= 250;
     newSkinBtn.style.display = 'none';
     clickMe.classList.remove('hide');
