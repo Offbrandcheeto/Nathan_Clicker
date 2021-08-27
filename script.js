@@ -7,19 +7,28 @@ let cps = 0;
 
 let itemOnePrice = 10;
 let itemTwoPrice = 100;
-let itemThreePrice = 500;
-let itemFourPrice = 2500;
+let itemThreePrice = 1100;
+let itemFourPrice = 12000;
 
 let itemOneNumber = 0;
 let itemTwoNumber = 0;
 let itemThreeNumber = 0;
 let itemFourNumber = 0;
 
+let skin = 1;
+
 // Const
 
 const multiplier = 1.15;
 
+const itemOneCPS = 0.1;
+const itemTwoCPS = 1;
+const itemThreeCPS = 8;
+const itemFourCPS = 50;
+
 const mainElement = document.getElementById('main-element');
+const newSkinBtn = document.getElementById('new-skin');
+const clickMe = document.getElementById('click-me');
 const clickCount = document.getElementById('click-count');
 const cpsCount = document.getElementById('cps-count');
 const clickAnimation = document.getElementById('click-animation');
@@ -78,6 +87,16 @@ function populateUI() {
   if (localStorage.getItem('savedNumberFour')) {
     itemFourNumber = JSON.parse(localStorage.getItem('savedNumberFour'));
   }
+
+  if (localStorage.getItem('skin')) {
+    skin = JSON.parse(localStorage.getItem('skin'));
+
+    if (skin === 1) {
+      mainElement.src = '/img/Nathan-Starter.png';
+    } else {
+      mainElement.src = '/img/Nathan.png';
+    }
+  }
 }
 
 const updateLocalStorage = setInterval(() => {
@@ -95,6 +114,7 @@ function updateStorage() {
   localStorage.setItem('savedNumberTwo', JSON.stringify(itemTwoNumber));
   localStorage.setItem('savedNumberThree', JSON.stringify(itemThreeNumber));
   localStorage.setItem('savedNumberFour', JSON.stringify(itemFourNumber));
+  localStorage.setItem('skin', JSON.stringify(skin));
 }
 
 // Intervals
@@ -110,8 +130,8 @@ const updateGame = setInterval(() => {
 
   heading1.textContent = `Cost: ${itemOnePrice} | +0.1 Sec`;
   heading2.textContent = `Cost: ${itemTwoPrice} | +1 Sec`;
-  heading3.textContent = `Cost: ${itemThreePrice} | +5 Sec`;
-  heading4.textContent = `Cost: ${itemFourPrice} | +15 Sec`;
+  heading3.textContent = `Cost: ${itemThreePrice} | +8 Sec`;
+  heading4.textContent = `Cost: ${itemFourPrice} | +50 Sec`;
 
   number1.textContent = `${itemOneNumber}`;
   number2.textContent = `${itemTwoNumber}`;
@@ -127,13 +147,19 @@ function clearGame() {
 
   itemOnePrice = 10;
   itemTwoPrice = 100;
-  itemThreePrice = 500;
-  itemFourPrice = 2500;
+  itemThreePrice = 1100;
+  itemFourPrice = 12000;
 
   itemOneNumber = 0;
   itemTwoNumber = 0;
   itemThreeNumber = 0;
   itemFourNumber = 0;
+
+  // New Skin Stuff
+  skin = 1;
+  mainElement.src = '/img/Nathan-Starter.png';
+  newSkinBtn.style.display = 'block';
+  clickMe.classList.add('hide');
 
   localStorage.clear();
 }
@@ -151,7 +177,7 @@ function mainFunction() {
 function buyItemOne() {
   if (clicks >= itemOnePrice) {
     clicks -= itemOnePrice;
-    cps += 0.1;
+    cps += itemOneCPS;
     itemOnePrice *= multiplier;
     itemOnePrice = Math.round(itemOnePrice);
     itemOneNumber++;
@@ -161,7 +187,7 @@ function buyItemOne() {
 function buyItemTwo() {
   if (clicks >= itemTwoPrice) {
     clicks -= itemTwoPrice;
-    cps++;
+    cps += itemTwoCPS;
     itemTwoPrice *= multiplier;
     itemTwoPrice = Math.round(itemTwoPrice);
     itemTwoNumber++;
@@ -171,7 +197,7 @@ function buyItemTwo() {
 function buyItemThree() {
   if (clicks >= itemThreePrice) {
     clicks -= itemThreePrice;
-    cps += 5;
+    cps += itemThreeCPS;
     itemThreePrice *= multiplier;
     itemThreePrice = Math.round(itemThreePrice);
     itemThreeNumber++;
@@ -181,10 +207,20 @@ function buyItemThree() {
 function buyItemFour() {
   if (clicks >= itemFourPrice) {
     clicks -= itemFourPrice;
-    cps += 15;
+    cps += itemFourCPS;
     itemFourPrice *= multiplier;
     itemFourPrice = Math.round(itemFourPrice);
     itemFourNumber++;
+  }
+}
+
+function newSkin() {
+  if (clicks >= 0) {
+    clicks -= 250;
+    newSkinBtn.style.display = 'none';
+    clickMe.classList.remove('hide');
+    mainElement.src = '/img/Nathan.png';
+    skin = 2;
   }
 }
 
@@ -196,6 +232,8 @@ item1.addEventListener('click', buyItemOne);
 item2.addEventListener('click', buyItemTwo);
 item3.addEventListener('click', buyItemThree);
 item4.addEventListener('click', buyItemFour);
+
+newSkinBtn.addEventListener('click', newSkin);
 
 document.addEventListener('keydown', e => {
   if (e.key === ' ') {
