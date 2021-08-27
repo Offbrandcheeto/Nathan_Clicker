@@ -15,16 +15,22 @@ let itemTwoNumber = 0;
 let itemThreeNumber = 0;
 let itemFourNumber = 0;
 
+let weedUpgradePrice = 100;
+let pillsUpgradePrice = 500;
+let jointUpgradePrice = 2750;
+let bongUpgradePrice = 25000;
+
 let skin = 1;
 
 // Const
 
 const multiplier = 1.15;
+const upgradeMultiplier = 2;
 
-const itemOneCPS = 0.1;
-const itemTwoCPS = 1;
-const itemThreeCPS = 8;
-const itemFourCPS = 50;
+let itemOneCPS = 0.1;
+let itemTwoCPS = 1;
+let itemThreeCPS = 8;
+let itemFourCPS = 50;
 
 const mainElement = document.getElementById('main-element');
 const newSkinBtn = document.getElementById('new-skin');
@@ -43,6 +49,16 @@ const number2 = document.getElementById('number-2');
 const number3 = document.getElementById('number-3');
 const number4 = document.getElementById('number-4');
 
+const weedHeading = document.getElementById('weed-heading');
+const pillsHeading = document.getElementById('pills-heading');
+const jointHeading = document.getElementById('joint-heading');
+const bongHeading = document.getElementById('bong-heading');
+
+const weedUpgrade = document.getElementById('upgrade-weed');
+const pillsUpgrade = document.getElementById('upgrade-pills');
+const jointUpgrade = document.getElementById('upgrade-joint');
+const bongUpgrade = document.getElementById('upgrade-bong');
+
 // Local Storage
 
 populateUI();
@@ -56,6 +72,7 @@ function populateUI() {
     cps = JSON.parse(localStorage.getItem('savedCPS'));
   }
 
+  //********************************************************
   if (localStorage.getItem('savedItemOne')) {
     itemOnePrice = JSON.parse(localStorage.getItem('savedItemOne'));
   }
@@ -72,6 +89,7 @@ function populateUI() {
     itemFourPrice = JSON.parse(localStorage.getItem('savedItemFour'));
   }
 
+  // ***************************************************
   if (localStorage.getItem('savedNumberOne')) {
     itemOneNumber = JSON.parse(localStorage.getItem('savedNumberOne'));
   }
@@ -88,13 +106,51 @@ function populateUI() {
     itemFourNumber = JSON.parse(localStorage.getItem('savedNumberFour'));
   }
 
+  // Item CPS
+  if (localStorage.getItem('savedItemOneCPS')) {
+    itemOneCPS = JSON.parse(localStorage.getItem('savedItemOneCPS'));
+  }
+
+  if (localStorage.getItem('savedItemTwoCPS')) {
+    itemTwoCPS = JSON.parse(localStorage.getItem('savedItemTwoCPS'));
+  }
+
+  if (localStorage.getItem('savedItemThreeCPS')) {
+    itemThreeCPS = JSON.parse(localStorage.getItem('savedItemThreeCPS'));
+  }
+
+  if (localStorage.getItem('savedItemFourCPS')) {
+    itemFourCPS = JSON.parse(localStorage.getItem('savedItemFourCPS'));
+  }
+
+  // Upgrades
+  if (localStorage.getItem('savedWeedUpgrade')) {
+    weedUpgradePrice = JSON.parse(localStorage.getItem('savedWeedUpgrade'));
+  }
+
+  if (localStorage.getItem('savedPillsUpgrade')) {
+    pillsUpgradePrice = JSON.parse(localStorage.getItem('savedPillsUpgrade'));
+  }
+
+  if (localStorage.getItem('savedJointUpgrade')) {
+    jointUpgradePrice = JSON.parse(localStorage.getItem('savedJointUpgrade'));
+  }
+
+  if (localStorage.getItem('savedBongUpgrade')) {
+    bongUpgradePrice = JSON.parse(localStorage.getItem('savedBongUpgrade'));
+  }
+
   if (localStorage.getItem('skin')) {
     skin = JSON.parse(localStorage.getItem('skin'));
 
     if (skin === 1) {
       mainElement.src = '/img/Nathan-Starter.png';
+      newSkinBtn.style.display = 'block';
+      clickMe.classList.add('hide');
     } else {
       mainElement.src = '/img/Nathan.png';
+      newSkinBtn.style.display = 'none';
+      clickMe.classList.remove('hide');
     }
   }
 }
@@ -104,16 +160,31 @@ const updateLocalStorage = setInterval(() => {
 }, 100);
 
 function updateStorage() {
+  // Clicks / CPS
   localStorage.setItem('savedClicks', JSON.stringify(clicks));
   localStorage.setItem('savedCPS', JSON.stringify(cps));
+  // Price
   localStorage.setItem('savedItemOne', JSON.stringify(itemOnePrice));
   localStorage.setItem('savedItemTwo', JSON.stringify(itemTwoPrice));
   localStorage.setItem('savedItemThree', JSON.stringify(itemThreePrice));
   localStorage.setItem('savedItemFour', JSON.stringify(itemFourPrice));
+  // Number
   localStorage.setItem('savedNumberOne', JSON.stringify(itemOneNumber));
   localStorage.setItem('savedNumberTwo', JSON.stringify(itemTwoNumber));
   localStorage.setItem('savedNumberThree', JSON.stringify(itemThreeNumber));
   localStorage.setItem('savedNumberFour', JSON.stringify(itemFourNumber));
+  // Item CPS
+  localStorage.setItem('savedItemOneCPS', JSON.stringify(itemOneCPS));
+  localStorage.setItem('savedItemTwoCPS', JSON.stringify(itemTwoCPS));
+  localStorage.setItem('savedItemThreeCPS', JSON.stringify(itemThreeCPS));
+  localStorage.setItem('savedItemFourCPS', JSON.stringify(itemFourCPS));
+
+  // Upgrades
+  localStorage.setItem('savedWeedUpgrade', JSON.stringify(weedUpgradePrice));
+  localStorage.setItem('savedPillsUpgrade', JSON.stringify(pillsUpgradePrice));
+  localStorage.setItem('savedJointUpgrade', JSON.stringify(jointUpgradePrice));
+  localStorage.setItem('savedBongUpgrade', JSON.stringify(bongUpgradePrice));
+  // Skin
   localStorage.setItem('skin', JSON.stringify(skin));
 }
 
@@ -128,15 +199,20 @@ const updateGame = setInterval(() => {
 
   clickCount.textContent = `Stoned Score: ${Math.floor(clicks)}`;
 
-  heading1.textContent = `Cost: ${itemOnePrice} | +0.1 Sec`;
-  heading2.textContent = `Cost: ${itemTwoPrice} | +1 Sec`;
-  heading3.textContent = `Cost: ${itemThreePrice} | +8 Sec`;
-  heading4.textContent = `Cost: ${itemFourPrice} | +50 Sec`;
+  heading1.textContent = `Cost: ${itemOnePrice} | +${itemOneCPS} Sec`;
+  heading2.textContent = `Cost: ${itemTwoPrice} | +${itemTwoCPS} Sec`;
+  heading3.textContent = `Cost: ${itemThreePrice} | +${itemThreeCPS} Sec`;
+  heading4.textContent = `Cost: ${itemFourPrice} | +${itemFourCPS} Sec`;
 
   number1.textContent = `${itemOneNumber}`;
   number2.textContent = `${itemTwoNumber}`;
   number3.textContent = `${itemThreeNumber}`;
   number4.textContent = `${itemFourNumber}`;
+
+  weedHeading.textContent = `Weed Upgrade | ${weedUpgradePrice}`;
+  pillsHeading.textContent = `Pills Upgrade | ${pillsUpgradePrice}`;
+  jointHeading.textContent = `Joint Upgrade | ${jointUpgradePrice}`;
+  bongHeading.textContent = `Bong Upgrade | ${bongUpgradePrice}`;
 }, 10);
 
 // Functions
@@ -214,6 +290,7 @@ function buyItemFour() {
   }
 }
 
+// New Skin
 function newSkin() {
   if (clicks >= 250) {
     clicks -= 250;
@@ -221,6 +298,47 @@ function newSkin() {
     clickMe.classList.remove('hide');
     mainElement.src = '/img/Nathan.png';
     skin = 2;
+  }
+}
+
+// Upgrades
+function upgradeItemWeed() {
+  if (clicks >= weedUpgradePrice) {
+    itemOneCPS += itemOneCPS;
+    cps += itemOneNumber * 0.1;
+    clicks -= weedUpgradePrice;
+    weedUpgradePrice *= upgradeMultiplier;
+    weedUpgradePrice = Math.round(weedUpgradePrice);
+  }
+}
+
+function upgradeItemPills() {
+  if (clicks >= pillsUpgradePrice) {
+    itemTwoCPS += itemTwoCPS;
+    cps += itemTwoNumber * 1;
+    clicks -= pillsUpgradePrice;
+    pillsUpgradePrice *= upgradeMultiplier;
+    pillsUpgradePrice = Math.round(pillsUpgradePrice);
+  }
+}
+
+function upgradeItemJoint() {
+  if (clicks >= pillsUpgradePrice) {
+    itemThreeCPS += itemThreeCPS;
+    cps += itemThreeNumber * 8;
+    clicks -= pillsUpgradePrice;
+    pillsUpgradePrice *= upgradeMultiplier;
+    pillsUpgradePrice = Math.round(pillsUpgradePrice);
+  }
+}
+
+function upgradeItemBong() {
+  if (clicks >= bongUpgradePrice) {
+    itemOneCPS += itemFourCPS;
+    cps += itemFourNumber * 50;
+    clicks -= bongUpgradePrice;
+    bongUpgradePrice *= upgradeMultiplier;
+    bongUpgradePrice = Math.round(bongUpgradePrice);
   }
 }
 
@@ -235,8 +353,13 @@ item4.addEventListener('click', buyItemFour);
 
 newSkinBtn.addEventListener('click', newSkin);
 
+weedUpgrade.addEventListener('click', upgradeItemWeed);
+pillsUpgrade.addEventListener('click', upgradeItemPills);
+jointUpgrade.addEventListener('click', upgradeItemJoint);
+bongUpgrade.addEventListener('click', upgradeItemBong);
+
 document.addEventListener('keydown', e => {
-  if (e.key === ' ') {
+  if (e.key === 'Alt') {
     clearGame();
   }
 });
