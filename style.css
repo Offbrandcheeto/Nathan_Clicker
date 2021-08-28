@@ -156,10 +156,10 @@ i {
   cursor: pointer;
   font-size: 4rem;
   padding: 1rem;
-  transition: transform 100ms ease-in-out;
+  transition: transform 300ms ease-in-out;
 }
 
-i:active {
+i:hover {
   transform: scale(1.1);
 }
 

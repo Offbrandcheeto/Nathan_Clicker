@@ -1,7 +1,7 @@
 'use strict';
 
 // Let Vars
-let clicks = 100000;
+let clicks = 0;
 let cps = 0;
 
 let itemOnePrice = 15;
@@ -61,9 +61,9 @@ const bongUpgrade = document.getElementById('upgrade-bong');
 populateUI();
 
 function populateUI() {
-  // if (localStorage.getItem('savedClicks')) {
-  //   clicks = JSON.parse(localStorage.getItem('savedClicks'));
-  // }
+  if (localStorage.getItem('savedClicks')) {
+    clicks = JSON.parse(localStorage.getItem('savedClicks'));
+  }
 
   if (localStorage.getItem('savedCPS')) {
     cps = JSON.parse(localStorage.getItem('savedCPS'));
@@ -218,7 +218,7 @@ const updateGame = setInterval(() => {
 
 // Functions
 function clearGame() {
-  clicks = 100000;
+  clicks = 0;
   cps = 0;
 
   itemOnePrice = 15;
