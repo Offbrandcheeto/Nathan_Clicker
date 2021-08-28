@@ -1,10 +1,10 @@
 'use strict';
 
 // Let Vars
-let clicks = 0;
+let clicks = 100000;
 let cps = 0;
 
-let itemOnePrice = 10;
+let itemOnePrice = 15;
 let itemTwoPrice = 100;
 let itemThreePrice = 1100;
 let itemFourPrice = 12000;
@@ -61,9 +61,9 @@ const bongUpgrade = document.getElementById('upgrade-bong');
 populateUI();
 
 function populateUI() {
-  if (localStorage.getItem('savedClicks')) {
-    clicks = JSON.parse(localStorage.getItem('savedClicks'));
-  }
+  // if (localStorage.getItem('savedClicks')) {
+  //   clicks = JSON.parse(localStorage.getItem('savedClicks'));
+  // }
 
   if (localStorage.getItem('savedCPS')) {
     cps = JSON.parse(localStorage.getItem('savedCPS'));
@@ -191,6 +191,11 @@ const clicksPerSecond = setInterval(() => {
 }, 1000);
 
 const updateGame = setInterval(() => {
+  cps =
+    itemOneCPS * itemOneNumber +
+    itemTwoCPS * itemTwoNumber +
+    itemThreeCPS * itemThreeNumber +
+    itemFourCPS * itemFourNumber;
   cpsCount.textContent = `Per Second: ${Math.round(cps * 10) / 10}`;
 
   clickCount.textContent = `Stoned Score: ${Math.floor(clicks)}`;
@@ -213,10 +218,10 @@ const updateGame = setInterval(() => {
 
 // Functions
 function clearGame() {
-  clicks = 0;
+  clicks = 100000;
   cps = 0;
 
-  itemOnePrice = 10;
+  itemOnePrice = 15;
   itemTwoPrice = 100;
   itemThreePrice = 1100;
   itemFourPrice = 12000;
@@ -297,8 +302,8 @@ function buyItemFour() {
 
 // New Skin
 function newSkin() {
-  if (clicks >= 100) {
-    clicks -= 100;
+  if (clicks >= 150) {
+    clicks -= 150;
     newSkinBtn.style.display = 'none';
     clickMe.classList.remove('hide');
     mainElement.src = '/img/Nathan.png';
@@ -309,9 +314,8 @@ function newSkin() {
 // Upgrades
 function upgradeItemWeed() {
   if (clicks >= weedUpgradePrice) {
-    itemOneCPS += 0.1;
+    itemOneCPS *= 2;
     itemOneCPS = Math.round(itemOneCPS * 10) / 10;
-    cps += itemOneNumber * 0.1;
     clicks -= weedUpgradePrice;
     weedUpgradePrice *= upgradeMultiplier;
     weedUpgradePrice = Math.round(weedUpgradePrice);
@@ -320,9 +324,8 @@ function upgradeItemWeed() {
 
 function upgradeItemPills() {
   if (clicks >= pillsUpgradePrice) {
-    itemTwoCPS += 1;
+    itemTwoCPS *= 2;
     itemTwoCPS = Math.round(itemTwoCPS);
-    cps += itemTwoNumber * 1;
     clicks -= pillsUpgradePrice;
     pillsUpgradePrice *= upgradeMultiplier;
     pillsUpgradePrice = Math.round(pillsUpgradePrice);
@@ -330,21 +333,19 @@ function upgradeItemPills() {
 }
 
 function upgradeItemJoint() {
-  if (clicks >= pillsUpgradePrice) {
-    itemThreeCPS += 8;
+  if (clicks >= jointUpgradePrice) {
+    itemThreeCPS *= 2;
     itemThreeCPS = Math.round(itemThreeCPS);
-    cps += itemThreeNumber * 8;
-    clicks -= pillsUpgradePrice;
-    pillsUpgradePrice *= upgradeMultiplier;
-    pillsUpgradePrice = Math.round(pillsUpgradePrice);
+    clicks -= jointUpgradePrice;
+    jointUpgradePrice *= upgradeMultiplier;
+    jointUpgradePrice = Math.round(jointUpgradePrice);
   }
 }
 
 function upgradeItemBong() {
   if (clicks >= bongUpgradePrice) {
-    itemOneCPS += 50;
+    itemFourCPS *= 2;
     itemFourCPS = Math.round(itemFourCPS);
-    cps += itemFourNumber * 50;
     clicks -= bongUpgradePrice;
     bongUpgradePrice *= upgradeMultiplier;
     bongUpgradePrice = Math.round(bongUpgradePrice);
