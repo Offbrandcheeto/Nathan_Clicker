@@ -3,6 +3,7 @@
 // Let Vars
 let clicks = 0;
 let cps = 0;
+let cpc = 1;
 
 let itemOnePrice = 15;
 let itemTwoPrice = 100;
@@ -18,6 +19,7 @@ let weedUpgradePrice = 100;
 let pillsUpgradePrice = 500;
 let jointUpgradePrice = 2750;
 let bongUpgradePrice = 25000;
+let mouseUpgradePrice = 250;
 
 let itemOneCPS = 0.1;
 let itemTwoCPS = 1;
@@ -25,6 +27,15 @@ let itemThreeCPS = 8;
 let itemFourCPS = 50;
 
 let skin = 1;
+
+// Show Stuff
+let showWeedUpgrade = false;
+let showPillsUpgrade = false;
+let showJointUpgrade = false;
+let showBongUpgrade = false;
+
+// Items
+let pillsAreaShow = false;
 
 // Const Vars
 const multiplier = 1.15;
@@ -51,11 +62,29 @@ const weedHeading = document.getElementById('weed-heading');
 const pillsHeading = document.getElementById('pills-heading');
 const jointHeading = document.getElementById('joint-heading');
 const bongHeading = document.getElementById('bong-heading');
+const mouseHeading = document.getElementById('mouse-heading');
 
 const weedUpgrade = document.getElementById('upgrade-weed');
 const pillsUpgrade = document.getElementById('upgrade-pills');
 const jointUpgrade = document.getElementById('upgrade-joint');
 const bongUpgrade = document.getElementById('upgrade-bong');
+const mouseUpgrade = document.getElementById('upgrade-mouse');
+
+const weedUpgradeArea = document.getElementById('weed-upgrade-area');
+const pillsUpgradeArea = document.getElementById('pills-upgrade-area');
+const jointUpgradeArea = document.getElementById('joint-upgrade-area');
+const bongUpgradeArea = document.getElementById('bong-upgrade-area');
+
+const pillsArea = document.getElementById('pills');
+
+const weedUI = document.getElementById('item1');
+const pillsUI = document.getElementById('item2');
+const jointUI = document.getElementById('item3');
+const bongUI = document.getElementById('item4');
+
+const pillsQuestion = document.getElementById('pills-question');
+const jointQuestion = document.getElementById('joint-question');
+const bongQuestion = document.getElementById('bong-question');
 
 // Local Storage
 populateUI();
@@ -150,6 +179,42 @@ function populateUI() {
       clickMe.classList.remove('hide');
     }
   }
+
+  if (localStorage.getItem('savedWeedUpgradeArea')) {
+    showWeedUpgrade = JSON.parse(localStorage.getItem('savedWeedUpgradeArea'));
+    if (showBongUpgrade === true) {
+      weedUpgradeArea.classList.remove('hide');
+    }
+  }
+
+  if (localStorage.getItem('savedPillsUpgradeArea')) {
+    if (localStorage.getItem('savedPillsUpgradeArea') === true) {
+      pillsUpgradeArea.classList.remove('hide');
+    }
+  }
+
+  if (localStorage.getItem('savedJointUpgradeArea')) {
+    if (localStorage.getItem('savedUpgradeArea') === true) {
+      jointUpgradeArea.classList.remove('hide');
+    }
+  }
+
+  if (localStorage.getItem('savedBongUpgradeArea')) {
+    if (localStorage.getItem('savedBongUpgradeArea') === true) {
+      bongUpgradeArea.classList.remove('hide');
+    }
+  }
+
+  // Items
+  if (localStorage.getItem('savedPillsArea')) {
+    pillsAreaShow = JSON.parse(localStorage.getItem('savedPillsArea'));
+    if (pillsAreaShow === true) {
+      pillsUI.classList.remove('hide');
+      pillsQuestion.classList.add('hide');
+      heading2.classList.remove('hide');
+      number2.classList.remove('hide');
+    }
+  }
 }
 
 const updateLocalStorage = setInterval(() => {
@@ -183,6 +248,21 @@ function updateStorage() {
   localStorage.setItem('savedBongUpgrade', JSON.stringify(bongUpgradePrice));
   // Skin
   localStorage.setItem('skin', JSON.stringify(skin));
+
+  // Upgrades
+  localStorage.setItem('savedWeedUpgradeArea', JSON.stringify(showWeedUpgrade));
+  localStorage.setItem(
+    'savedPillsUpgradeArea',
+    JSON.stringify(showPillsUpgrade)
+  );
+  localStorage.setItem(
+    'savedJointUpgradeArea',
+    JSON.stringify(showJointUpgrade)
+  );
+  localStorage.setItem('savedBongUpgradeArea', JSON.stringify(showBongUpgrade));
+
+  // Items
+  localStorage.setItem('savedPillsArea', JSON.stringify(pillsAreaShow));
 }
 
 // Intervals
@@ -214,6 +294,21 @@ const updateGame = setInterval(() => {
   pillsHeading.textContent = `Pills Upgrade | ${pillsUpgradePrice}`;
   jointHeading.textContent = `Joint Upgrade | ${jointUpgradePrice}`;
   bongHeading.textContent = `Bong Upgrade | ${bongUpgradePrice}`;
+  mouseHeading.textContent = `Mouse Upgrade | ${mouseUpgradePrice}`;
+
+  // Show Stuff
+  if (showWeedUpgrade === true) {
+    weedUpgradeArea.classList.remove('hide');
+  }
+  if (showPillsUpgrade === true) {
+    pillsUpgradeArea.classList.remove('hide');
+  }
+  if (showJointUpgrade === true) {
+    jointUpgradeArea.classList.remove('hide');
+  }
+  if (showBongUpgrade === true) {
+    bongUpgradeArea.classList.remove('hide');
+  }
 }, 10);
 
 // Functions
@@ -247,11 +342,24 @@ function clearGame() {
   newSkinBtn.style.display = 'block';
   clickMe.classList.add('hide');
 
+  // Upgrades
+  weedUpgradeArea.classList.add('hide');
+  pillsUpgradeArea.classList.add('hide');
+  jointUpgradeArea.classList.add('hide');
+  bongUpgradeArea.classList.add('hide');
+  pillsArea.classList.add('hide');
+
+  // Show Stuff
+  showWeedUpgrade = false;
+  showPillsUpgrade = false;
+  showJointUpgrade = false;
+  showBongUpgrade = false;
+
   localStorage.clear();
 }
 
 function mainFunction() {
-  clicks++;
+  clicks += cpc;
   mainElement.classList.add('animate');
   clickAnimation.classList.remove('hidden');
   setTimeout(() => {
@@ -267,6 +375,13 @@ function buyItemOne() {
     itemOnePrice *= multiplier;
     itemOnePrice = Math.round(itemOnePrice);
     itemOneNumber++;
+    showWeedUpgrade = true;
+    pillsAreaShow = true;
+    pillsArea.classList.remove('hide');
+    pillsUI.classList.remove('hide');
+    pillsQuestion.classList.add('hide');
+    heading2.classList.remove('hide');
+    number2.classList.remove('hide');
   }
 }
 

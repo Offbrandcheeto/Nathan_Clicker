@@ -16,7 +16,7 @@
 
 /* Hide Class */
 .hide {
-  display: none;
+  display: none !important;
 }
 
 body {
