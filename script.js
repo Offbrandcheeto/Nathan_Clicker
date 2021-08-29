@@ -75,8 +75,6 @@ const pillsUpgradeArea = document.getElementById('pills-upgrade-area');
 const jointUpgradeArea = document.getElementById('joint-upgrade-area');
 const bongUpgradeArea = document.getElementById('bong-upgrade-area');
 
-const pillsArea = document.getElementById('pills');
-
 const weedUI = document.getElementById('item1');
 const pillsUI = document.getElementById('item2');
 const jointUI = document.getElementById('item3');
@@ -96,6 +94,10 @@ function populateUI() {
 
   if (localStorage.getItem('savedCPS')) {
     cps = JSON.parse(localStorage.getItem('savedCPS'));
+  }
+
+  if (localStorage.getItem('savedCPC')) {
+    cpc = JSON.parse(localStorage.getItem('savedCPC'));
   }
 
   //********************************************************
@@ -166,6 +168,10 @@ function populateUI() {
     bongUpgradePrice = JSON.parse(localStorage.getItem('savedBongUpgrade'));
   }
 
+  if (localStorage.getItem('savedMouseUpgrade')) {
+    mouseUpgradePrice = JSON.parse(localStorage.getItem('savedMouseUpgrade'));
+  }
+
   if (localStorage.getItem('skin')) {
     skin = JSON.parse(localStorage.getItem('skin'));
 
@@ -222,9 +228,10 @@ const updateLocalStorage = setInterval(() => {
 }, 100);
 
 function updateStorage() {
-  // Clicks / CPS
+  // Clicks / CPS / CPC
   localStorage.setItem('savedClicks', JSON.stringify(clicks));
   localStorage.setItem('savedCPS', JSON.stringify(cps));
+  localStorage.setItem('savedCPC', JSON.stringify(cpc));
   // Price
   localStorage.setItem('savedItemOne', JSON.stringify(itemOnePrice));
   localStorage.setItem('savedItemTwo', JSON.stringify(itemTwoPrice));
@@ -246,6 +253,7 @@ function updateStorage() {
   localStorage.setItem('savedPillsUpgrade', JSON.stringify(pillsUpgradePrice));
   localStorage.setItem('savedJointUpgrade', JSON.stringify(jointUpgradePrice));
   localStorage.setItem('savedBongUpgrade', JSON.stringify(bongUpgradePrice));
+  localStorage.setItem('savedMouseUpgrade', JSON.stringify(mouseUpgradePrice));
   // Skin
   localStorage.setItem('skin', JSON.stringify(skin));
 
@@ -309,12 +317,31 @@ const updateGame = setInterval(() => {
   if (showBongUpgrade === true) {
     bongUpgradeArea.classList.remove('hide');
   }
+
+  clickAnimation.textContent = `+${cpc}`;
+
+  if (pillsAreaShow === false) {
+    item2.classList.add('hide');
+    pillsQuestion.classList.remove('hide');
+    pillsUI.classList.add('hide');
+    pillsQuestion.classList.remove('hide');
+    heading2.classList.add('hide');
+    number2.classList.add('hide');
+  } else {
+    item2.classList.remove('hide');
+    pillsQuestion.classList.add('hide');
+    pillsUI.classList.remove('hide');
+    pillsQuestion.classList.add('hide');
+    heading2.classList.remove('hide');
+    number2.classList.remove('hide');
+  }
 }, 10);
 
 // Functions
 function clearGame() {
   clicks = 0;
   cps = 0;
+  cpc = 1;
 
   itemOnePrice = 15;
   itemTwoPrice = 100;
@@ -325,6 +352,7 @@ function clearGame() {
   pillsUpgradePrice = 500;
   jointUpgradePrice = 2750;
   bongUpgradePrice = 25000;
+  mouseUpgradePrice = 250;
 
   itemOneNumber = 0;
   itemTwoNumber = 0;
@@ -347,13 +375,14 @@ function clearGame() {
   pillsUpgradeArea.classList.add('hide');
   jointUpgradeArea.classList.add('hide');
   bongUpgradeArea.classList.add('hide');
-  pillsArea.classList.add('hide');
 
   // Show Stuff
   showWeedUpgrade = false;
   showPillsUpgrade = false;
   showJointUpgrade = false;
   showBongUpgrade = false;
+
+  pillsAreaShow = false;
 
   localStorage.clear();
 }
@@ -377,11 +406,6 @@ function buyItemOne() {
     itemOneNumber++;
     showWeedUpgrade = true;
     pillsAreaShow = true;
-    pillsArea.classList.remove('hide');
-    pillsUI.classList.remove('hide');
-    pillsQuestion.classList.add('hide');
-    heading2.classList.remove('hide');
-    number2.classList.remove('hide');
   }
 }
 
@@ -467,6 +491,14 @@ function upgradeItemBong() {
   }
 }
 
+function upgradeMouse() {
+  if (clicks >= mouseUpgradePrice) {
+    cpc *= 2;
+    clicks -= mouseUpgradePrice;
+    mouseUpgradePrice *= 2;
+  }
+}
+
 // Event Listeners
 mainElement.addEventListener('click', mainFunction);
 
@@ -481,6 +513,7 @@ weedUpgrade.addEventListener('click', upgradeItemWeed);
 pillsUpgrade.addEventListener('click', upgradeItemPills);
 jointUpgrade.addEventListener('click', upgradeItemJoint);
 bongUpgrade.addEventListener('click', upgradeItemBong);
+mouseUpgrade.addEventListener('click', upgradeMouse);
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Alt') {
