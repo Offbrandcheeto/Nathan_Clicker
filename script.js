@@ -1,7 +1,7 @@
 'use strict';
 
 // Let Vars
-let clicks = 0;
+let clicks = 1000000;
 let cps = 0;
 let cpc = 1;
 
@@ -36,6 +36,8 @@ let showBongUpgrade = false;
 
 // Items
 let pillsAreaShow = false;
+let jointAreaShow = false;
+let bongAreaShow = false;
 
 // Const Vars
 const multiplier = 1.15;
@@ -221,6 +223,26 @@ function populateUI() {
       number2.classList.remove('hide');
     }
   }
+
+  if (localStorage.getItem('savedJointArea')) {
+    jointAreaShow = JSON.parse(localStorage.getItem('savedJointArea'));
+    if (jointAreaShow === true) {
+      jointUI.classList.remove('hide');
+      jointQuestion.classList.add('hide');
+      heading3.classList.remove('hide');
+      number3.classList.remove('hide');
+    }
+  }
+
+  if (localStorage.getItem('savedBongArea')) {
+    bongAreaShow = JSON.parse(localStorage.getItem('savedPillsArea'));
+    if (bongAreaShow === true) {
+      bongUI.classList.remove('hide');
+      bongQuestion.classList.add('hide');
+      heading4.classList.remove('hide');
+      number4.classList.remove('hide');
+    }
+  }
 }
 
 const updateLocalStorage = setInterval(() => {
@@ -271,6 +293,8 @@ function updateStorage() {
 
   // Items
   localStorage.setItem('savedPillsArea', JSON.stringify(pillsAreaShow));
+  localStorage.setItem('savedJointArea', JSON.stringify(jointAreaShow));
+  localStorage.setItem('savedBongArea', JSON.stringify(bongAreaShow));
 }
 
 // Intervals
@@ -279,6 +303,7 @@ const clicksPerSecond = setInterval(() => {
 }, 1000);
 
 const updateGame = setInterval(() => {
+  clickAnimation.textContent = `+${cpc}`;
   cps =
     itemOneCPS * itemOneNumber +
     itemTwoCPS * itemTwoNumber +
@@ -318,28 +343,73 @@ const updateGame = setInterval(() => {
     bongUpgradeArea.classList.remove('hide');
   }
 
-  clickAnimation.textContent = `+${cpc}`;
+  // Set Offs
+  if (itemOneNumber >= 3) {
+    showWeedUpgrade = true;
+    pillsAreaShow = true;
+  }
 
+  if (itemTwoNumber >= 3) {
+    showPillsUpgrade = true;
+    jointAreaShow = true;
+  }
+
+  if (itemThreeNumber >= 3) {
+    showJointUpgrade = true;
+    bongAreaShow = true;
+  }
+
+  if (itemFourNumber >= 3) {
+    showBongUpgrade = true;
+  }
+
+  // Area Show
   if (pillsAreaShow === false) {
     item2.classList.add('hide');
     pillsQuestion.classList.remove('hide');
     pillsUI.classList.add('hide');
-    pillsQuestion.classList.remove('hide');
     heading2.classList.add('hide');
     number2.classList.add('hide');
   } else {
     item2.classList.remove('hide');
     pillsQuestion.classList.add('hide');
     pillsUI.classList.remove('hide');
-    pillsQuestion.classList.add('hide');
     heading2.classList.remove('hide');
     number2.classList.remove('hide');
+  }
+
+  if (jointAreaShow === false) {
+    item3.classList.add('hide');
+    jointQuestion.classList.remove('hide');
+    jointUI.classList.add('hide');
+    heading3.classList.add('hide');
+    number3.classList.add('hide');
+  } else {
+    item3.classList.remove('hide');
+    jointQuestion.classList.add('hide');
+    jointUI.classList.remove('hide');
+    heading3.classList.remove('hide');
+    number3.classList.remove('hide');
+  }
+
+  if (bongAreaShow === false) {
+    item4.classList.add('hide');
+    bongQuestion.classList.remove('hide');
+    bongUI.classList.add('hide');
+    heading4.classList.add('hide');
+    number4.classList.add('hide');
+  } else {
+    item4.classList.remove('hide');
+    bongQuestion.classList.add('hide');
+    bongUI.classList.remove('hide');
+    heading4.classList.remove('hide');
+    number4.classList.remove('hide');
   }
 }, 10);
 
 // Functions
 function clearGame() {
-  clicks = 0;
+  clicks = 1000000;
   cps = 0;
   cpc = 1;
 
@@ -377,12 +447,17 @@ function clearGame() {
   bongUpgradeArea.classList.add('hide');
 
   // Show Stuff
+
+  // Upgrades
   showWeedUpgrade = false;
   showPillsUpgrade = false;
   showJointUpgrade = false;
   showBongUpgrade = false;
 
+  // Items
   pillsAreaShow = false;
+  jointAreaShow = false;
+  bongAreaShow = false;
 
   localStorage.clear();
 }
@@ -404,8 +479,6 @@ function buyItemOne() {
     itemOnePrice *= multiplier;
     itemOnePrice = Math.round(itemOnePrice);
     itemOneNumber++;
-    showWeedUpgrade = true;
-    pillsAreaShow = true;
   }
 }
 
