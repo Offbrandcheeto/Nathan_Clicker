@@ -1,7 +1,7 @@
 'use strict';
 
 // Let Vars
-let clicks = 1000000;
+let clicks = 100000;
 let cps = 0;
 let cpc = 1;
 
@@ -19,7 +19,7 @@ let weedUpgradePrice = 100;
 let pillsUpgradePrice = 500;
 let jointUpgradePrice = 2750;
 let bongUpgradePrice = 25000;
-let mouseUpgradePrice = 250;
+let mouseUpgradePrice = 500;
 
 let itemOneCPS = 0.1;
 let itemTwoCPS = 1;
@@ -174,19 +174,19 @@ function populateUI() {
     mouseUpgradePrice = JSON.parse(localStorage.getItem('savedMouseUpgrade'));
   }
 
-  if (localStorage.getItem('skin')) {
-    skin = JSON.parse(localStorage.getItem('skin'));
+  // if (localStorage.getItem('skin')) {
+  //   skin = JSON.parse(localStorage.getItem('skin'));
 
-    if (skin === 1) {
-      mainElement.src = '/img/Nathan-Starter.png';
-      newSkinBtn.style.display = 'block';
-      clickMe.classList.add('hide');
-    } else {
-      mainElement.src = '/img/Nathan.png';
-      newSkinBtn.style.display = 'none';
-      clickMe.classList.remove('hide');
-    }
-  }
+  //   if (skin === 1) {
+  //     mainElement.src = '/img/Nathan-Starter.png';
+  //     newSkinBtn.style.display = 'block';
+  //     clickMe.classList.add('hide');
+  //   } else {
+  //     mainElement.src = '/img/Nathan.png';
+  //     newSkinBtn.style.display = 'none';
+  //     clickMe.classList.remove('hide');
+  //   }
+  // }
 
   if (localStorage.getItem('savedWeedUpgradeArea')) {
     showWeedUpgrade = JSON.parse(localStorage.getItem('savedWeedUpgradeArea'));
@@ -344,22 +344,22 @@ const updateGame = setInterval(() => {
   }
 
   // Set Offs
-  if (itemOneNumber >= 3) {
+  if (itemOneNumber >= 5) {
     showWeedUpgrade = true;
     pillsAreaShow = true;
   }
 
-  if (itemTwoNumber >= 3) {
+  if (itemTwoNumber >= 5) {
     showPillsUpgrade = true;
     jointAreaShow = true;
   }
 
-  if (itemThreeNumber >= 3) {
+  if (itemThreeNumber >= 5) {
     showJointUpgrade = true;
     bongAreaShow = true;
   }
 
-  if (itemFourNumber >= 3) {
+  if (itemFourNumber >= 5) {
     showBongUpgrade = true;
   }
 
@@ -405,11 +405,65 @@ const updateGame = setInterval(() => {
     heading4.classList.remove('hide');
     number4.classList.remove('hide');
   }
+
+  if (clicks < itemOnePrice) {
+    item1.style.opacity = 0.6;
+  } else {
+    item1.style.opacity = 1;
+  }
+
+  if (clicks < itemTwoPrice) {
+    item2.style.opacity = 0.6;
+  } else {
+    item2.style.opacity = 1;
+  }
+
+  if (clicks < itemThreePrice) {
+    item3.style.opacity = 0.6;
+  } else {
+    item3.style.opacity = 1;
+  }
+
+  if (clicks < itemFourPrice) {
+    item4.style.opacity = 0.6;
+  } else {
+    item4.style.opacity = 1;
+  }
+
+  if (clicks < weedUpgradePrice) {
+    weedUpgrade.style.opacity = 0.6;
+  } else {
+    weedUpgrade.style.opacity = 1;
+  }
+
+  if (clicks < pillsUpgradePrice) {
+    pillsUpgrade.style.opacity = 0.6;
+  } else {
+    pillsUpgrade.style.opacity = 1;
+  }
+
+  if (clicks < jointUpgradePrice) {
+    jointUpgrade.style.opacity = 0.6;
+  } else {
+    jointUpgrade.style.opacity = 1;
+  }
+
+  if (clicks < bongUpgradePrice) {
+    bongUpgrade.style.opacity = 0.6;
+  } else {
+    bongUpgrade.style.opacity = 1;
+  }
+
+  if (clicks < mouseUpgradePrice) {
+    mouseUpgrade.style.opacity = 0.6;
+  } else {
+    mouseUpgrade.style.opacity = 1;
+  }
 }, 10);
 
 // Functions
 function clearGame() {
-  clicks = 1000000;
+  clicks = 100000;
   cps = 0;
   cpc = 1;
 
@@ -422,7 +476,7 @@ function clearGame() {
   pillsUpgradePrice = 500;
   jointUpgradePrice = 2750;
   bongUpgradePrice = 25000;
-  mouseUpgradePrice = 250;
+  mouseUpgradePrice = 500;
 
   itemOneNumber = 0;
   itemTwoNumber = 0;
@@ -434,11 +488,11 @@ function clearGame() {
   itemThreeCPS = 8;
   itemFourCPS = 50;
 
-  // New Skin Stuff
-  skin = 1;
-  mainElement.src = '/img/Nathan-Starter.png';
-  newSkinBtn.style.display = 'block';
-  clickMe.classList.add('hide');
+  // SKIN STUFF
+  // skin = 1;
+  // mainElement.src = '/img/Nathan-Starter.png';
+  // newSkinBtn.style.display = 'block';
+  // clickMe.classList.add('hide');
 
   // Upgrades
   weedUpgradeArea.classList.add('hide');
@@ -514,8 +568,8 @@ function buyItemFour() {
 
 // New Skin
 function newSkin() {
-  if (clicks >= 150) {
-    clicks -= 150;
+  if (clicks >= 250) {
+    clicks -= 250;
     newSkinBtn.style.display = 'none';
     clickMe.classList.remove('hide');
     mainElement.src = '/img/Nathan.png';
@@ -580,7 +634,7 @@ item2.addEventListener('click', buyItemTwo);
 item3.addEventListener('click', buyItemThree);
 item4.addEventListener('click', buyItemFour);
 
-newSkinBtn.addEventListener('click', newSkin);
+// newSkinBtn.addEventListener('click', newSkin);
 
 weedUpgrade.addEventListener('click', upgradeItemWeed);
 pillsUpgrade.addEventListener('click', upgradeItemPills);
