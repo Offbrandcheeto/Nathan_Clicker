@@ -318,7 +318,7 @@ i:hover {
   }
 
   .bitch {
-    padding: 0;
+    display: none;
   }
 
   /* Animation */

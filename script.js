@@ -100,8 +100,23 @@ const jointQuestion = document.getElementById('joint-question');
 const bongQuestion = document.getElementById('bong-question');
 const beerQuestion = document.getElementById('beer-question');
 
+const bitchHeading = document.getElementById('bitch-text');
+const list = [
+  'click me bitch!',
+  "click don't think!",
+  'click for a kiss!',
+  'damn that click felt good!',
+  'give a click for communism!',
+  'make a ginger smile today!',
+  "vaping doesn't gain you clicks!",
+  "how's class going?",
+  'are you usually this slow?',
+  'you have the ability to read!',
+];
+
 // Local Storage
 populateUI();
+getRandomSaying();
 
 function populateUI() {
   if (localStorage.getItem('savedClicks')) {
@@ -291,6 +306,16 @@ function populateUI() {
   }
 }
 
+const updateText = setInterval(() => {
+  getRandomSaying();
+}, 5000);
+
+function getRandomSaying() {
+  return (bitchHeading.textContent = `${
+    list[Math.floor(Math.random() * list.length)]
+  }`);
+}
+
 const updateLocalStorage = setInterval(() => {
   updateStorage();
 }, 100);
@@ -355,7 +380,7 @@ const clicksPerSecond = setInterval(() => {
 }, 1000);
 
 const updateGame = setInterval(() => {
-  document.title = `Nathan Clicker | ${clicks}`;
+  document.title = `Nathan Clicker | ${Math.floor(clicks)}`;
   clickAnimation.textContent = `+${cpc}`;
   cps =
     itemOneCPS * itemOneNumber +
