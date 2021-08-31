@@ -43,6 +43,13 @@ body {
   letter-spacing: 1px;
 }
 
+.align-heading {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding-top: 2rem;
+}
+
 /* Button */
 .btn {
   cursor: pointer;
@@ -111,7 +118,7 @@ nav {
 
 /* Main Style */
 .main {
-  height: 85vh;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   padding: 1rem;
@@ -145,6 +152,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin: 1rem 0;
 }
 
 /* Other Styles */
@@ -261,7 +269,6 @@ i:hover {
 
   .main {
     grid-template-columns: 1fr;
-    height: 100%;
   }
 
   .grid {

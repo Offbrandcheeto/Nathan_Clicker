@@ -1,7 +1,7 @@
 'use strict';
 
 // Let Vars
-let clicks = 100000;
+let clicks = 0;
 let cps = 0;
 let cpc = 1;
 
@@ -9,22 +9,26 @@ let itemOnePrice = 15;
 let itemTwoPrice = 100;
 let itemThreePrice = 1100;
 let itemFourPrice = 12000;
+let itemFivePrice = 130000;
 
 let itemOneNumber = 0;
 let itemTwoNumber = 0;
 let itemThreeNumber = 0;
 let itemFourNumber = 0;
+let itemFiveNumber = 0;
 
-let weedUpgradePrice = 100;
-let pillsUpgradePrice = 500;
-let jointUpgradePrice = 2750;
-let bongUpgradePrice = 25000;
+let weedUpgradePrice = 200;
+let pillsUpgradePrice = 1000;
+let jointUpgradePrice = 5000;
+let bongUpgradePrice = 50000;
+let beerUpgradePrice = 750000;
 let mouseUpgradePrice = 500;
 
 let itemOneCPS = 0.1;
 let itemTwoCPS = 1;
 let itemThreeCPS = 8;
 let itemFourCPS = 50;
+let itemFiveCPS = 250;
 
 let skin = 1;
 
@@ -33,15 +37,18 @@ let showWeedUpgrade = false;
 let showPillsUpgrade = false;
 let showJointUpgrade = false;
 let showBongUpgrade = false;
+let showBeerUpgrade = false;
 
 // Items
 let pillsAreaShow = false;
 let jointAreaShow = false;
 let bongAreaShow = false;
+let beerAreaShow = false;
 
 // Const Vars
-const multiplier = 1.15;
+const multiplier = 1.2;
 const upgradeMultiplier = 2;
+const mouseMultiplier = 3;
 
 const mainElement = document.getElementById('main-element');
 const newSkinBtn = document.getElementById('new-skin');
@@ -54,37 +61,44 @@ const heading1 = document.getElementById('heading-1');
 const heading2 = document.getElementById('heading-2');
 const heading3 = document.getElementById('heading-3');
 const heading4 = document.getElementById('heading-4');
+const heading5 = document.getElementById('heading-5');
 
 const number1 = document.getElementById('number-1');
 const number2 = document.getElementById('number-2');
 const number3 = document.getElementById('number-3');
 const number4 = document.getElementById('number-4');
+const number5 = document.getElementById('number-5');
 
 const weedHeading = document.getElementById('weed-heading');
 const pillsHeading = document.getElementById('pills-heading');
 const jointHeading = document.getElementById('joint-heading');
 const bongHeading = document.getElementById('bong-heading');
+const beerHeading = document.getElementById('beer-heading');
 const mouseHeading = document.getElementById('mouse-heading');
 
 const weedUpgrade = document.getElementById('upgrade-weed');
 const pillsUpgrade = document.getElementById('upgrade-pills');
 const jointUpgrade = document.getElementById('upgrade-joint');
 const bongUpgrade = document.getElementById('upgrade-bong');
+const beerUpgrade = document.getElementById('upgrade-beer');
 const mouseUpgrade = document.getElementById('upgrade-mouse');
 
 const weedUpgradeArea = document.getElementById('weed-upgrade-area');
 const pillsUpgradeArea = document.getElementById('pills-upgrade-area');
 const jointUpgradeArea = document.getElementById('joint-upgrade-area');
 const bongUpgradeArea = document.getElementById('bong-upgrade-area');
+const beerUpgradeArea = document.getElementById('beer-upgrade-area');
 
 const weedUI = document.getElementById('item1');
 const pillsUI = document.getElementById('item2');
 const jointUI = document.getElementById('item3');
 const bongUI = document.getElementById('item4');
+const beerUI = document.getElementById('item5');
 
 const pillsQuestion = document.getElementById('pills-question');
 const jointQuestion = document.getElementById('joint-question');
 const bongQuestion = document.getElementById('bong-question');
+const beerQuestion = document.getElementById('beer-question');
 
 // Local Storage
 populateUI();
@@ -119,6 +133,10 @@ function populateUI() {
     itemFourPrice = JSON.parse(localStorage.getItem('savedItemFour'));
   }
 
+  if (localStorage.getItem('savedItemFive')) {
+    itemFivePrice = JSON.parse(localStorage.getItem('savedItemFive'));
+  }
+
   // ***************************************************
   if (localStorage.getItem('savedNumberOne')) {
     itemOneNumber = JSON.parse(localStorage.getItem('savedNumberOne'));
@@ -134,6 +152,10 @@ function populateUI() {
 
   if (localStorage.getItem('savedNumberFour')) {
     itemFourNumber = JSON.parse(localStorage.getItem('savedNumberFour'));
+  }
+
+  if (localStorage.getItem('savedNumberFive')) {
+    itemFiveNumber = JSON.parse(localStorage.getItem('savedNumberFive'));
   }
 
   // Item CPS
@@ -153,6 +175,10 @@ function populateUI() {
     itemFourCPS = JSON.parse(localStorage.getItem('savedItemFourCPS'));
   }
 
+  if (localStorage.getItem('savedItemFiveCPS')) {
+    itemFiveCPS = JSON.parse(localStorage.getItem('savedItemFiveCPS'));
+  }
+
   // Upgrades
   if (localStorage.getItem('savedWeedUpgrade')) {
     weedUpgradePrice = JSON.parse(localStorage.getItem('savedWeedUpgrade'));
@@ -168,6 +194,10 @@ function populateUI() {
 
   if (localStorage.getItem('savedBongUpgrade')) {
     bongUpgradePrice = JSON.parse(localStorage.getItem('savedBongUpgrade'));
+  }
+
+  if (localStorage.getItem('savedBeerUpgrade')) {
+    beerUpgradePrice = JSON.parse(localStorage.getItem('savedBeerUpgrade'));
   }
 
   if (localStorage.getItem('savedMouseUpgrade')) {
@@ -213,6 +243,12 @@ function populateUI() {
     }
   }
 
+  if (localStorage.getItem('savedBeerUpgradeArea')) {
+    if (localStorage.getItem('savedBeerUpgradeArea') === true) {
+      beerUpgradeArea.classList.remove('hide');
+    }
+  }
+
   // Items
   if (localStorage.getItem('savedPillsArea')) {
     pillsAreaShow = JSON.parse(localStorage.getItem('savedPillsArea'));
@@ -235,12 +271,22 @@ function populateUI() {
   }
 
   if (localStorage.getItem('savedBongArea')) {
-    bongAreaShow = JSON.parse(localStorage.getItem('savedPillsArea'));
+    bongAreaShow = JSON.parse(localStorage.getItem('savedBongArea'));
     if (bongAreaShow === true) {
       bongUI.classList.remove('hide');
       bongQuestion.classList.add('hide');
       heading4.classList.remove('hide');
       number4.classList.remove('hide');
+    }
+  }
+
+  if (localStorage.getItem('savedBeerArea')) {
+    beerAreaShow = JSON.parse(localStorage.getItem('savedBeerArea'));
+    if (beerAreaShow === true) {
+      beerUI.classList.remove('hide');
+      beerQuestion.classList.add('hide');
+      heading5.classList.remove('hide');
+      number5.classList.remove('hide');
     }
   }
 }
@@ -259,22 +305,26 @@ function updateStorage() {
   localStorage.setItem('savedItemTwo', JSON.stringify(itemTwoPrice));
   localStorage.setItem('savedItemThree', JSON.stringify(itemThreePrice));
   localStorage.setItem('savedItemFour', JSON.stringify(itemFourPrice));
+  localStorage.setItem('savedItemFive', JSON.stringify(itemFivePrice));
   // Number
   localStorage.setItem('savedNumberOne', JSON.stringify(itemOneNumber));
   localStorage.setItem('savedNumberTwo', JSON.stringify(itemTwoNumber));
   localStorage.setItem('savedNumberThree', JSON.stringify(itemThreeNumber));
   localStorage.setItem('savedNumberFour', JSON.stringify(itemFourNumber));
+  localStorage.setItem('savedNumberFive', JSON.stringify(itemFiveNumber));
   // Item CPS
   localStorage.setItem('savedItemOneCPS', JSON.stringify(itemOneCPS));
   localStorage.setItem('savedItemTwoCPS', JSON.stringify(itemTwoCPS));
   localStorage.setItem('savedItemThreeCPS', JSON.stringify(itemThreeCPS));
   localStorage.setItem('savedItemFourCPS', JSON.stringify(itemFourCPS));
+  localStorage.setItem('savedItemFiveCPS', JSON.stringify(itemFiveCPS));
 
   // Upgrades
   localStorage.setItem('savedWeedUpgrade', JSON.stringify(weedUpgradePrice));
   localStorage.setItem('savedPillsUpgrade', JSON.stringify(pillsUpgradePrice));
   localStorage.setItem('savedJointUpgrade', JSON.stringify(jointUpgradePrice));
   localStorage.setItem('savedBongUpgrade', JSON.stringify(bongUpgradePrice));
+  localStorage.setItem('savedBeerUpgrade', JSON.stringify(beerUpgradePrice));
   localStorage.setItem('savedMouseUpgrade', JSON.stringify(mouseUpgradePrice));
   // Skin
   localStorage.setItem('skin', JSON.stringify(skin));
@@ -290,11 +340,13 @@ function updateStorage() {
     JSON.stringify(showJointUpgrade)
   );
   localStorage.setItem('savedBongUpgradeArea', JSON.stringify(showBongUpgrade));
+  localStorage.setItem('savedBeerUpgradeArea', JSON.stringify(showBeerUpgrade));
 
   // Items
   localStorage.setItem('savedPillsArea', JSON.stringify(pillsAreaShow));
   localStorage.setItem('savedJointArea', JSON.stringify(jointAreaShow));
   localStorage.setItem('savedBongArea', JSON.stringify(bongAreaShow));
+  localStorage.setItem('savedBeerArea', JSON.stringify(beerAreaShow));
 }
 
 // Intervals
@@ -303,12 +355,14 @@ const clicksPerSecond = setInterval(() => {
 }, 1000);
 
 const updateGame = setInterval(() => {
+  document.title = `Nathan Clicker | ${clicks}`;
   clickAnimation.textContent = `+${cpc}`;
   cps =
     itemOneCPS * itemOneNumber +
     itemTwoCPS * itemTwoNumber +
     itemThreeCPS * itemThreeNumber +
-    itemFourCPS * itemFourNumber;
+    itemFourCPS * itemFourNumber +
+    itemFiveCPS * itemFiveNumber;
   cpsCount.textContent = `Per Second: ${Math.round(cps * 10) / 10}`;
 
   clickCount.textContent = `Stoned Score: ${Math.floor(clicks)}`;
@@ -317,16 +371,19 @@ const updateGame = setInterval(() => {
   heading2.textContent = `Cost: ${itemTwoPrice} | +${itemTwoCPS} Sec`;
   heading3.textContent = `Cost: ${itemThreePrice} | +${itemThreeCPS} Sec`;
   heading4.textContent = `Cost: ${itemFourPrice} | +${itemFourCPS} Sec`;
+  heading5.textContent = `Cost: ${itemFivePrice} | +${itemFiveCPS} Sec`;
 
   number1.textContent = `${itemOneNumber}`;
   number2.textContent = `${itemTwoNumber}`;
   number3.textContent = `${itemThreeNumber}`;
   number4.textContent = `${itemFourNumber}`;
+  number5.textContent = `${itemFiveNumber}`;
 
   weedHeading.textContent = `Weed Upgrade | ${weedUpgradePrice}`;
   pillsHeading.textContent = `Pills Upgrade | ${pillsUpgradePrice}`;
   jointHeading.textContent = `Joint Upgrade | ${jointUpgradePrice}`;
   bongHeading.textContent = `Bong Upgrade | ${bongUpgradePrice}`;
+  beerHeading.textContent = `Beer Upgrade | ${beerUpgradePrice}`;
   mouseHeading.textContent = `Mouse Upgrade | ${mouseUpgradePrice}`;
 
   // Show Stuff
@@ -341,6 +398,9 @@ const updateGame = setInterval(() => {
   }
   if (showBongUpgrade === true) {
     bongUpgradeArea.classList.remove('hide');
+  }
+  if (showBeerUpgrade === true) {
+    beerUpgradeArea.classList.remove('hide');
   }
 
   // Set Offs
@@ -357,10 +417,16 @@ const updateGame = setInterval(() => {
   if (itemThreeNumber >= 5) {
     showJointUpgrade = true;
     bongAreaShow = true;
+    beerQuestion.classList.remove('hide');
   }
 
   if (itemFourNumber >= 5) {
     showBongUpgrade = true;
+    beerAreaShow = true;
+  }
+
+  if (itemFiveNumber >= 5) {
+    showBeerUpgrade = true;
   }
 
   // Area Show
@@ -406,6 +472,19 @@ const updateGame = setInterval(() => {
     number4.classList.remove('hide');
   }
 
+  if (beerAreaShow === false) {
+    item5.classList.add('hide');
+    beerUI.classList.add('hide');
+    heading5.classList.add('hide');
+    number5.classList.add('hide');
+  } else {
+    item5.classList.remove('hide');
+    beerQuestion.classList.add('hide');
+    beerUI.classList.remove('hide');
+    heading5.classList.remove('hide');
+    number5.classList.remove('hide');
+  }
+
   if (clicks < itemOnePrice) {
     item1.style.opacity = 0.6;
   } else {
@@ -428,6 +507,12 @@ const updateGame = setInterval(() => {
     item4.style.opacity = 0.6;
   } else {
     item4.style.opacity = 1;
+  }
+
+  if (clicks < itemFivePrice) {
+    item5.style.opacity = 0.6;
+  } else {
+    item5.style.opacity = 1;
   }
 
   if (clicks < weedUpgradePrice) {
@@ -454,6 +539,12 @@ const updateGame = setInterval(() => {
     bongUpgrade.style.opacity = 1;
   }
 
+  if (clicks < beerUpgradePrice) {
+    beerUpgrade.style.opacity = 0.6;
+  } else {
+    beerUpgrade.style.opacity = 1;
+  }
+
   if (clicks < mouseUpgradePrice) {
     mouseUpgrade.style.opacity = 0.6;
   } else {
@@ -463,7 +554,7 @@ const updateGame = setInterval(() => {
 
 // Functions
 function clearGame() {
-  clicks = 100000;
+  clicks = 0;
   cps = 0;
   cpc = 1;
 
@@ -471,22 +562,26 @@ function clearGame() {
   itemTwoPrice = 100;
   itemThreePrice = 1100;
   itemFourPrice = 12000;
+  itemFivePrice = 130000;
 
-  weedUpgradePrice = 100;
-  pillsUpgradePrice = 500;
-  jointUpgradePrice = 2750;
-  bongUpgradePrice = 25000;
+  weedUpgradePrice = 200;
+  pillsUpgradePrice = 1000;
+  jointUpgradePrice = 5000;
+  bongUpgradePrice = 50000;
+  beerUpgradePrice = 750000;
   mouseUpgradePrice = 500;
 
   itemOneNumber = 0;
   itemTwoNumber = 0;
   itemThreeNumber = 0;
   itemFourNumber = 0;
+  itemFiveNumber = 0;
 
   itemOneCPS = 0.1;
   itemTwoCPS = 1;
   itemThreeCPS = 8;
   itemFourCPS = 50;
+  itemFiveCPS = 250;
 
   // SKIN STUFF
   // skin = 1;
@@ -499,6 +594,7 @@ function clearGame() {
   pillsUpgradeArea.classList.add('hide');
   jointUpgradeArea.classList.add('hide');
   bongUpgradeArea.classList.add('hide');
+  beerUpgradeArea.classList.add('hide');
 
   // Show Stuff
 
@@ -507,11 +603,13 @@ function clearGame() {
   showPillsUpgrade = false;
   showJointUpgrade = false;
   showBongUpgrade = false;
+  showBeerUpgrade = false;
 
   // Items
   pillsAreaShow = false;
   jointAreaShow = false;
   bongAreaShow = false;
+  beerAreaShow = false;
 
   localStorage.clear();
 }
@@ -529,7 +627,6 @@ function mainFunction() {
 function buyItemOne() {
   if (clicks >= itemOnePrice) {
     clicks -= itemOnePrice;
-    cps += itemOneCPS;
     itemOnePrice *= multiplier;
     itemOnePrice = Math.round(itemOnePrice);
     itemOneNumber++;
@@ -539,7 +636,6 @@ function buyItemOne() {
 function buyItemTwo() {
   if (clicks >= itemTwoPrice) {
     clicks -= itemTwoPrice;
-    cps += itemTwoCPS;
     itemTwoPrice *= multiplier;
     itemTwoPrice = Math.round(itemTwoPrice);
     itemTwoNumber++;
@@ -549,7 +645,6 @@ function buyItemTwo() {
 function buyItemThree() {
   if (clicks >= itemThreePrice) {
     clicks -= itemThreePrice;
-    cps += itemThreeCPS;
     itemThreePrice *= multiplier;
     itemThreePrice = Math.round(itemThreePrice);
     itemThreeNumber++;
@@ -559,10 +654,18 @@ function buyItemThree() {
 function buyItemFour() {
   if (clicks >= itemFourPrice) {
     clicks -= itemFourPrice;
-    cps += itemFourCPS;
     itemFourPrice *= multiplier;
     itemFourPrice = Math.round(itemFourPrice);
     itemFourNumber++;
+  }
+}
+
+function buyItemFive() {
+  if (clicks >= itemFivePrice) {
+    clicks -= itemFivePrice;
+    itemFivePrice *= multiplier;
+    itemFivePrice = Math.round(itemFivePrice);
+    itemFiveNumber++;
   }
 }
 
@@ -618,11 +721,21 @@ function upgradeItemBong() {
   }
 }
 
+function upgradeItemBeer() {
+  if (clicks >= beerUpgradePrice) {
+    itemFiveCPS *= 2;
+    itemFiveCPS = Math.round(itemFiveCPS);
+    clicks -= beerUpgradePrice;
+    beerUpgradePrice *= upgradeMultiplier;
+    beerUpgradePrice = Math.round(beerUpgradePrice);
+  }
+}
+
 function upgradeMouse() {
   if (clicks >= mouseUpgradePrice) {
     cpc *= 2;
     clicks -= mouseUpgradePrice;
-    mouseUpgradePrice *= 2;
+    mouseUpgradePrice *= mouseMultiplier;
   }
 }
 
@@ -633,6 +746,7 @@ item1.addEventListener('click', buyItemOne);
 item2.addEventListener('click', buyItemTwo);
 item3.addEventListener('click', buyItemThree);
 item4.addEventListener('click', buyItemFour);
+item5.addEventListener('click', buyItemFive);
 
 // newSkinBtn.addEventListener('click', newSkin);
 
@@ -640,6 +754,7 @@ weedUpgrade.addEventListener('click', upgradeItemWeed);
 pillsUpgrade.addEventListener('click', upgradeItemPills);
 jointUpgrade.addEventListener('click', upgradeItemJoint);
 bongUpgrade.addEventListener('click', upgradeItemBong);
+beerUpgrade.addEventListener('click', upgradeItemBeer);
 mouseUpgrade.addEventListener('click', upgradeMouse);
 
 document.addEventListener('keydown', e => {
