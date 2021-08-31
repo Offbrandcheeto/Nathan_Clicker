@@ -33,6 +33,24 @@ body {
   color: var(--dark-color);
 }
 
+.news {
+  color: var(--dark-color);
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.border {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  width: 95%;
+  border: 4px solid var(--dark-color);
+  border-radius: 1rem;
+  margin: 2rem 0;
+}
+
 .big {
   font-size: 3rem;
   letter-spacing: 3px;

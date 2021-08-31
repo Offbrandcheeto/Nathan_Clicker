@@ -45,10 +45,15 @@ let jointAreaShow = false;
 let bongAreaShow = false;
 let beerAreaShow = false;
 
+// Saying
+let saying = '';
+
+// News
+let newsStory = '';
+
 // Const Vars
 const multiplier = 1.2;
-const upgradeMultiplier = 2;
-const mouseMultiplier = 3;
+const upgradeMultiplier = 3;
 
 const mainElement = document.getElementById('main-element');
 const newSkinBtn = document.getElementById('new-skin');
@@ -100,11 +105,13 @@ const jointQuestion = document.getElementById('joint-question');
 const bongQuestion = document.getElementById('bong-question');
 const beerQuestion = document.getElementById('beer-question');
 
+const news = document.getElementById('news');
 const bitchHeading = document.getElementById('bitch-text');
+
+bitchHeading.textContent = `welcome to nathan clicker!`;
 const list = [
-  'click me bitch!',
+  'fuck school, click me bitch!',
   "click don't think!",
-  'click for a kiss!',
   'damn that click felt good!',
   'give a click for communism!',
   'make a ginger smile today!',
@@ -112,11 +119,22 @@ const list = [
   "how's class going?",
   'are you usually this slow?',
   'you have the ability to read!',
+  'incoming teacher!',
+];
+
+const newsList = [
+  'News: Dylan Richards is pregnant, causing stocks to plummet.',
+  'News: JHS ranked first in the nation in slow ass walking.',
+  'News: New element found in red hair could help cure cancer.',
+  'News: School toilet clogged for first time since 1969.',
+  "News: New study finds kids don't like homework.",
+  'News: Study finds drinking water is the new smoking.',
+  'News: Jenna tolls gets engaged to jack mehof',
 ];
 
 // Local Storage
 populateUI();
-getRandomSaying();
+getNewNews();
 
 function populateUI() {
   if (localStorage.getItem('savedClicks')) {
@@ -306,14 +324,24 @@ function populateUI() {
   }
 }
 
+// Sayings
 const updateText = setInterval(() => {
   getRandomSaying();
 }, 5000);
 
 function getRandomSaying() {
-  return (bitchHeading.textContent = `${
-    list[Math.floor(Math.random() * list.length)]
-  }`);
+  saying = `${list[Math.floor(Math.random() * list.length)]}`;
+  bitchHeading.textContent = saying;
+}
+
+// News
+const updateNews = setInterval(() => {
+  getNewNews();
+}, 7500);
+
+function getNewNews() {
+  newsStory = `${newsList[Math.floor(Math.random() * newsList.length)]}`;
+  news.textContent = newsStory;
 }
 
 const updateLocalStorage = setInterval(() => {
@@ -380,7 +408,7 @@ const clicksPerSecond = setInterval(() => {
 }, 1000);
 
 const updateGame = setInterval(() => {
-  document.title = `Nathan Clicker | ${Math.floor(clicks)}`;
+  document.title = `Nathan Clicker || ${Math.floor(clicks)}`;
   clickAnimation.textContent = `+${cpc}`;
   cps =
     itemOneCPS * itemOneNumber +
@@ -390,7 +418,7 @@ const updateGame = setInterval(() => {
     itemFiveCPS * itemFiveNumber;
   cpsCount.textContent = `Per Second: ${Math.round(cps * 10) / 10}`;
 
-  clickCount.textContent = `Stoned Score: ${Math.floor(clicks)}`;
+  clickCount.textContent = `Total Clicks: ${Math.floor(clicks)}`;
 
   heading1.textContent = `Cost: ${itemOnePrice} | +${itemOneCPS} Sec`;
   heading2.textContent = `Cost: ${itemTwoPrice} | +${itemTwoCPS} Sec`;
@@ -583,6 +611,8 @@ function clearGame() {
   cps = 0;
   cpc = 1;
 
+  bitchHeading.textContent = `welcome to nathan clicker!`;
+
   itemOnePrice = 15;
   itemTwoPrice = 100;
   itemThreePrice = 1100;
@@ -760,7 +790,7 @@ function upgradeMouse() {
   if (clicks >= mouseUpgradePrice) {
     cpc *= 2;
     clicks -= mouseUpgradePrice;
-    mouseUpgradePrice *= mouseMultiplier;
+    mouseUpgradePrice *= upgradeMultiplier;
   }
 }
 
