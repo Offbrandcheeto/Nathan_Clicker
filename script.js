@@ -109,10 +109,11 @@ const news = document.getElementById('news');
 const bitchHeading = document.getElementById('bitch-text');
 
 bitchHeading.textContent = `welcome to nathan clicker!`;
+// 15
 const list = [
-  'fuck school, click me bitch!',
   "click don't think!",
   'damn that click felt good!',
+  'click me bitch',
   'give a click for communism!',
   'make a ginger smile today!',
   "vaping doesn't gain you clicks!",
@@ -122,23 +123,27 @@ const list = [
   'incoming teacher!',
   'my ass could click faster!',
   "don't look at me like that!",
-  "you're not wasting your life!",
   "suck a dick if you don't click!",
   'practice safe clicking!',
+  'fuck life just click',
 ];
 
+// 10
 const newsList = [
   'News: Dylan richards pregnant, doctors dumbfounded.',
   'News: JHS ranked first in the nation in slow ass walking.',
   'News: New element found in red hair could help cure cancer.',
-  'News: School toilet clogged for first time since 1969.',
+  "News: School toilet clogged for first time since 69'.",
   'News: Overweight teens may not be eating enough, study says.',
-  'News: Nathan clicker rated #1 game in antarctica.',
+  'News: Nathan clicker ranked #1 game in antarctica.',
   'News: Kid struggles when asked how to spell "JHS".',
   'News: Nathan cole to enter local beauty pageant.',
   'News: Parker glas voted sexist ginger alive.',
   'News: Nathan cole torches 3rd graders in 800m',
 ];
+
+// Sound Effects
+var snd = new Audio('trim.wav'); // buffers automatically when created
 
 // Local Storage
 populateUI();
@@ -681,6 +686,7 @@ function mainFunction() {
   clicks += cpc;
   mainElement.classList.add('animate');
   clickAnimation.classList.remove('hidden');
+  snd.play();
   setTimeout(() => {
     mainElement.classList.remove('animate');
     clickAnimation.classList.add('hidden');
