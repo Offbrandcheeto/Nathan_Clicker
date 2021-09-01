@@ -167,7 +167,6 @@ nav {
 
 .item-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 1rem 0;
@@ -196,8 +195,9 @@ i:hover {
   right: 0px;
 }
 
-.position {
+.grid .position {
   position: relative;
+  margin-right: 2rem;
 }
 
 /* Main Click Element */
@@ -229,7 +229,7 @@ i:hover {
   }
 
   from {
-    transform: scale(1.02);
+    transform: scale(1.03);
   }
 }
 
@@ -367,8 +367,16 @@ i:hover {
   }
 
   /* Upgrades */
-
   .upgrades {
     grid-template-columns: 1fr;
+  }
+
+  /* Flex */
+  .item-container {
+    flex-direction: column;
+  }
+
+  .grid .position {
+    margin-right: 0;
   }
 }

@@ -52,7 +52,7 @@ let saying = '';
 let newsStory = '';
 
 // Const Vars
-const multiplier = 1.2;
+const multiplier = 1.15;
 const upgradeMultiplier = 3;
 
 const mainElement = document.getElementById('main-element');
@@ -120,16 +120,27 @@ const list = [
   'are you usually this slow?',
   'you have the ability to read!',
   'incoming teacher!',
+  'my ass could click faster!',
+  'click if you suck!',
+  "don't look at me like that!",
+  "you're not wasting your life!",
+  "suck a dick if you don't click",
+  'practice safe clicking',
 ];
 
 const newsList = [
-  'News: Dylan Richards is pregnant, causing stocks to plummet.',
+  'News: Dylan richards is pregnant, causing stocks to plummet.',
   'News: JHS ranked first in the nation in slow ass walking.',
   'News: New element found in red hair could help cure cancer.',
   'News: School toilet clogged for first time since 1969.',
   "News: New study finds kids don't like homework.",
   'News: Study finds drinking water is the new smoking.',
-  'News: Jenna tolls gets engaged to jack mehof',
+  'News: Rain was a big factor is massive flood.',
+  'News: Overweight kids may not be eating enough, study says.',
+  "News: Dogs can understand us but just don't give a fuck.",
+  'News: JHS voted biggest cluster fuck parking lot.',
+  'News: Pill promises better sex, but could kill you.',
+  'News: Nathan cole clicker rated #1 game in the world.',
 ];
 
 // Local Storage
@@ -408,7 +419,7 @@ const clicksPerSecond = setInterval(() => {
 }, 1000);
 
 const updateGame = setInterval(() => {
-  document.title = `Nathan Clicker || ${Math.floor(clicks)}`;
+  document.title = `Nathan Clicker | Clicks: ${Math.floor(clicks)}`;
   clickAnimation.textContent = `+${cpc}`;
   cps =
     itemOneCPS * itemOneNumber +
