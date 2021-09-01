@@ -142,9 +142,6 @@ const newsList = [
   'News: Nathan cole torches 3rd graders in 800m',
 ];
 
-// Sound Effects
-var snd = new Audio('trim.wav'); // buffers automatically when created
-
 // Local Storage
 populateUI();
 getNewNews();
@@ -686,7 +683,6 @@ function mainFunction() {
   clicks += cpc;
   mainElement.classList.add('animate');
   clickAnimation.classList.remove('hidden');
-  snd.play();
   setTimeout(() => {
     mainElement.classList.remove('animate');
     clickAnimation.classList.add('hidden');
