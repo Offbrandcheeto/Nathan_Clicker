@@ -88,8 +88,9 @@ body {
 
 /* Footer */
 footer {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   padding: 1rem;
 }
 
@@ -209,7 +210,7 @@ i:hover {
 }
 
 .main-element:hover {
-  transform: scale(1.01);
+  transform: scale(1.03);
 }
 
 /* Animation */
@@ -229,7 +230,7 @@ i:hover {
   }
 
   from {
-    transform: scale(1.03);
+    transform: scale(1.05);
   }
 }
 
@@ -360,7 +361,6 @@ i:hover {
   footer {
     display: none;
   }
-
   /* Button */
   .btn {
     margin-top: 1.5rem;
