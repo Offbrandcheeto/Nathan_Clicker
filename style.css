@@ -127,8 +127,7 @@ nav {
   padding: 1rem;
 }
 
-.nav-link {
-  cursor: default;
+.nav-heading {
   font-size: 1.5rem;
   text-decoration: none;
   color: var(--dark-color);
@@ -327,7 +326,7 @@ i:hover {
     text-align: center;
   }
 
-  .nav-link {
+  .nav-heading {
     font-size: 1.2rem;
   }
 

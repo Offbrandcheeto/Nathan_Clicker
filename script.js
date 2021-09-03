@@ -30,8 +30,6 @@ let itemThreeCPS = 8;
 let itemFourCPS = 50;
 let itemFiveCPS = 250;
 
-let skin = 1;
-
 // Show Stuff
 let showWeedUpgrade = false;
 let showPillsUpgrade = false;
@@ -45,10 +43,8 @@ let jointAreaShow = false;
 let bongAreaShow = false;
 let beerAreaShow = false;
 
-// Saying
+// Saying & News
 let saying = '';
-
-// News
 let newsStory = '';
 
 // Const Vars
@@ -56,7 +52,6 @@ const multiplier = 1.15;
 const upgradeMultiplier = 3;
 
 const mainElement = document.getElementById('main-element');
-const newSkinBtn = document.getElementById('new-skin');
 const clickMe = document.getElementById('click-me');
 const clickCount = document.getElementById('click-count');
 const cpsCount = document.getElementById('cps-count');
@@ -113,7 +108,7 @@ bitchHeading.textContent = `welcome to nathan clicker!`;
 const list = [
   "click don't think!",
   'damn that click felt good!',
-  'click me bitch',
+  'click me bitch!',
   'give a click for communism!',
   'make a ginger smile today!',
   "vaping doesn't gain you clicks!",
@@ -125,7 +120,7 @@ const list = [
   "don't look at me like that!",
   "suck a dick if you don't click!",
   'practice safe clicking!',
-  'fuck life just click',
+  'fuck life just click!',
 ];
 
 // 10
@@ -139,7 +134,7 @@ const newsList = [
   'News: Kid struggles when asked how to spell "JHS".',
   'News: Nathan cole to enter local beauty pageant.',
   'News: Parker glas voted sexist ginger alive.',
-  'News: Nathan cole torches 3rd graders in 800m',
+  'News: Nathan cole torches 3rd graders in 800m.',
 ];
 
 // Local Storage
@@ -246,20 +241,6 @@ function populateUI() {
   if (localStorage.getItem('savedMouseUpgrade')) {
     mouseUpgradePrice = JSON.parse(localStorage.getItem('savedMouseUpgrade'));
   }
-
-  // if (localStorage.getItem('skin')) {
-  //   skin = JSON.parse(localStorage.getItem('skin'));
-
-  //   if (skin === 1) {
-  //     mainElement.src = '/img/Nathan-Starter.png';
-  //     newSkinBtn.style.display = 'block';
-  //     clickMe.classList.add('hide');
-  //   } else {
-  //     mainElement.src = '/img/Nathan.png';
-  //     newSkinBtn.style.display = 'none';
-  //     clickMe.classList.remove('hide');
-  //   }
-  // }
 
   if (localStorage.getItem('savedWeedUpgradeArea')) {
     showWeedUpgrade = JSON.parse(localStorage.getItem('savedWeedUpgradeArea'));
@@ -389,8 +370,6 @@ function updateStorage() {
   localStorage.setItem('savedBongUpgrade', JSON.stringify(bongUpgradePrice));
   localStorage.setItem('savedBeerUpgrade', JSON.stringify(beerUpgradePrice));
   localStorage.setItem('savedMouseUpgrade', JSON.stringify(mouseUpgradePrice));
-  // Skin
-  localStorage.setItem('skin', JSON.stringify(skin));
 
   // Upgrades
   localStorage.setItem('savedWeedUpgradeArea', JSON.stringify(showWeedUpgrade));
@@ -648,12 +627,6 @@ function clearGame() {
   itemFourCPS = 50;
   itemFiveCPS = 250;
 
-  // SKIN STUFF
-  // skin = 1;
-  // mainElement.src = '/img/Nathan-Starter.png';
-  // newSkinBtn.style.display = 'block';
-  // clickMe.classList.add('hide');
-
   // Upgrades
   weedUpgradeArea.classList.add('hide');
   pillsUpgradeArea.classList.add('hide');
@@ -731,17 +704,6 @@ function buyItemFive() {
     itemFivePrice *= multiplier;
     itemFivePrice = Math.round(itemFivePrice);
     itemFiveNumber++;
-  }
-}
-
-// New Skin
-function newSkin() {
-  if (clicks >= 250) {
-    clicks -= 250;
-    newSkinBtn.style.display = 'none';
-    clickMe.classList.remove('hide');
-    mainElement.src = '/img/Nathan.png';
-    skin = 2;
   }
 }
 
