@@ -290,7 +290,7 @@ i:hover {
 }
 
 /* Responsive */
-@media (max-width: 1300px) {
+@media (max-width: 1500px) {
   .upgrades {
     grid-template-columns: repeat(3, 1fr);
   }
