@@ -73,6 +73,23 @@ body {
   padding-top: 2rem;
 }
 
+/* Modal */
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  text-align: center;
+
+  background-color: white;
+  padding: 6rem;
+  border-radius: 1rem;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
 /* Button */
 .btn {
   cursor: pointer;

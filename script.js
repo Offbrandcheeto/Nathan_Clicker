@@ -114,6 +114,10 @@ const bet1m = document.getElementById('bet1M');
 const betHalf = document.getElementById('bet-half');
 const betAll = document.getElementById('bet-all');
 
+const winOrLoss = document.getElementById('win/loss');
+const results = document.getElementById('results');
+const modal = document.getElementById('modal');
+
 bitchHeading.textContent = `welcome to nathan clicker!`;
 // 15
 const list = [
@@ -830,90 +834,193 @@ function upgradeMouse() {
 
 function bet10Function() {
   if (clicks >= 10) {
+    let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
       clicks += 10;
+      winOrLoss.textContent = 'You Won 10 Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks += 10)}`;
+      modal.classList.remove('hide');
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     } else {
+      winOrLoss.textContent = 'You Lost 10 Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks -= 10)}`;
+      modal.classList.remove('hide');
       clicks -= 10;
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     }
   }
 }
 
 function bet100Function() {
   if (clicks >= 100) {
+    let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
       clicks += 100;
+      winOrLoss.textContent = 'You Won 100 Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks += 100)}`;
+      modal.classList.remove('hide');
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     } else {
+      winOrLoss.textContent = 'You Lost 100 Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks -= 100)}`;
+      modal.classList.remove('hide');
       clicks -= 100;
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     }
   }
 }
 
 function bet1kFunction() {
   if (clicks >= 1000) {
+    let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
       clicks += 1000;
+      winOrLoss.textContent = 'You Won 1k Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks += 1000)}`;
+      modal.classList.remove('hide');
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     } else {
+      winOrLoss.textContent = 'You Lost 1k Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks -= 1000)}`;
+      modal.classList.remove('hide');
       clicks -= 1000;
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     }
   }
 }
 
 function bet10kFunction() {
   if (clicks >= 10000) {
+    let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
       clicks += 10000;
+      winOrLoss.textContent = 'You Won 10k Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks += 10000)}`;
+      modal.classList.remove('hide');
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     } else {
+      winOrLoss.textContent = 'You Lost 10k Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks -= 10000)}`;
+      modal.classList.remove('hide');
       clicks -= 10000;
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     }
   }
 }
 
 function bet100kFunction() {
   if (clicks >= 100000) {
+    let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
       clicks += 100000;
+      winOrLoss.textContent = 'You Won 100k Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks += 100000)}`;
+      modal.classList.remove('hide');
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     } else {
+      winOrLoss.textContent = 'You Lost 100k Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks -= 100000)}`;
+      modal.classList.remove('hide');
       clicks -= 100000;
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     }
   }
 }
 
 function bet1mFunction() {
   if (clicks >= 1000000) {
+    let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
       clicks += 1000000;
+      winOrLoss.textContent = 'You Won 1m Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks += 1000000)}`;
+      modal.classList.remove('hide');
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     } else {
+      winOrLoss.textContent = 'You Lost 100 Clicks!';
+      results.textContent = `${betClicks} --> ${(betClicks -= 1000000)}`;
+      modal.classList.remove('hide');
       clicks -= 1000000;
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     }
   }
 }
 
 function betHalfFunction() {
-  if (clicks >= 2) {
-    let number = Math.floor(Math.random() * 2) + 1;
+  if (clicks > 1) {
+    let startClicks = Math.floor(clicks);
     let betClicks = Math.floor(clicks / 2);
+    let number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
       clicks += betClicks;
+      winOrLoss.textContent = `You won ${betClicks} clicks!`;
+      results.textContent = `${startClicks} --> ${(startClicks += betClicks)}`;
+      modal.classList.remove('hide');
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     } else {
+      winOrLoss.textContent = `You lost ${betClicks} clicks!`;
+      results.textContent = `${startClicks} --> ${(startClicks -= betClicks)}`;
+      modal.classList.remove('hide');
       clicks -= betClicks;
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     }
   }
 }
 
 function betAllFunction() {
-  if (clicks >= 1) {
-    let number = Math.floor(Math.random() * 2) + 1;
+  if (clicks > 0) {
     let betClicks = Math.floor(clicks);
+    let number = Math.floor(Math.random() * 2) + 1;
     if (number === 1) {
       clicks += betClicks;
+      winOrLoss.textContent = `You won ${betClicks} clicks!`;
+      results.textContent = `${betClicks} --> ${betClicks * 2}`;
+      modal.classList.remove('hide');
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     } else {
+      winOrLoss.textContent = `You lost ${betClicks} clicks!`;
+      results.textContent = `${betClicks} --> 0`;
+      modal.classList.remove('hide');
       clicks -= betClicks;
+      setTimeout(() => {
+        modal.classList.add('hide');
+      }, 2000);
     }
   }
 }
