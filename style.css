@@ -157,6 +157,7 @@ footer {
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
+/* Comment */
 
 .bet-grid .btn {
   margin: 1rem 0;
@@ -342,6 +343,19 @@ i:hover {
     padding-bottom: 3rem;
   }
 
+  .bet-clicks-area {
+    grid-template-columns: 1fr;
+  }
+
+  .bet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .modal {
+    width: 95%;
+    padding: 3rem 1rem;
+  }
+
   /* Item  */
   .item-container:first-child {
     padding-top: 2rem;
@@ -417,6 +431,7 @@ i:hover {
   /* Button */
   .btn {
     margin-top: 1.5rem;
+    font-size: 1rem;
   }
 
   /* Upgrades */

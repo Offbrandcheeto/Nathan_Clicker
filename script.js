@@ -47,6 +47,9 @@ let beerAreaShow = false;
 let saying = '';
 let newsStory = '';
 
+// Betting
+let readyForBet = true;
+
 // Const Vars
 const multiplier = 1.15;
 const upgradeMultiplier = 3;
@@ -144,7 +147,7 @@ const newsList = [
   'News: JHS ranked first in the nation in slow ass walking.',
   'News: New element found in red hair could help cure cancer.',
   "News: School toilet clogged for first time since 69'.",
-  'News: Overweight teens may not be eating enough, study says.',
+  'News: Overweight teens may not be eating enough, study finds.',
   'News: Nathan clicker ranked #1 game in antarctica.',
   'News: Kid struggles when asked how to spell "JHS".',
   'News: Nathan cole to enter local beauty pageant.',
@@ -470,12 +473,12 @@ const updateGame = setInterval(() => {
   if (itemTwoNumber >= 5) {
     showPillsUpgrade = true;
     jointAreaShow = true;
+    beerQuestion.classList.remove('hide');
   }
 
   if (itemThreeNumber >= 5) {
     showJointUpgrade = true;
     bongAreaShow = true;
-    beerQuestion.classList.remove('hide');
   }
 
   if (itemFourNumber >= 5) {
@@ -697,6 +700,7 @@ function clearGame() {
   jointUpgradeArea.classList.add('hide');
   bongUpgradeArea.classList.add('hide');
   beerUpgradeArea.classList.add('hide');
+  beerQuestion.classList.add('hide');
 
   // Show Stuff
 
@@ -833,9 +837,10 @@ function upgradeMouse() {
 // Betting
 
 function bet10Function() {
-  if (clicks >= 10) {
+  if (clicks >= 10 && readyForBet === true) {
     let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
+    readyForBet = false;
     if (number === 1) {
       clicks += 10;
       winOrLoss.textContent = 'You Won 10 Clicks!';
@@ -843,6 +848,7 @@ function bet10Function() {
       modal.classList.remove('hide');
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     } else {
       winOrLoss.textContent = 'You Lost 10 Clicks!';
@@ -851,15 +857,17 @@ function bet10Function() {
       clicks -= 10;
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     }
   }
 }
 
 function bet100Function() {
-  if (clicks >= 100) {
+  if (clicks >= 100 && readyForBet === true) {
     let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
+    readyForBet = false;
     if (number === 1) {
       clicks += 100;
       winOrLoss.textContent = 'You Won 100 Clicks!';
@@ -867,6 +875,7 @@ function bet100Function() {
       modal.classList.remove('hide');
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     } else {
       winOrLoss.textContent = 'You Lost 100 Clicks!';
@@ -875,15 +884,17 @@ function bet100Function() {
       clicks -= 100;
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     }
   }
 }
 
 function bet1kFunction() {
-  if (clicks >= 1000) {
+  if (clicks >= 1000 && readyForBet === true) {
     let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
+    readyForBet = false;
     if (number === 1) {
       clicks += 1000;
       winOrLoss.textContent = 'You Won 1k Clicks!';
@@ -891,6 +902,7 @@ function bet1kFunction() {
       modal.classList.remove('hide');
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     } else {
       winOrLoss.textContent = 'You Lost 1k Clicks!';
@@ -899,15 +911,17 @@ function bet1kFunction() {
       clicks -= 1000;
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     }
   }
 }
 
 function bet10kFunction() {
-  if (clicks >= 10000) {
+  if (clicks >= 10000 && readyForBet === true) {
     let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
+    readyForBet = false;
     if (number === 1) {
       clicks += 10000;
       winOrLoss.textContent = 'You Won 10k Clicks!';
@@ -915,6 +929,7 @@ function bet10kFunction() {
       modal.classList.remove('hide');
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     } else {
       winOrLoss.textContent = 'You Lost 10k Clicks!';
@@ -923,15 +938,17 @@ function bet10kFunction() {
       clicks -= 10000;
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     }
   }
 }
 
 function bet100kFunction() {
-  if (clicks >= 100000) {
+  if (clicks >= 100000 && readyForBet === true) {
     let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
+    readyForBet = false;
     if (number === 1) {
       clicks += 100000;
       winOrLoss.textContent = 'You Won 100k Clicks!';
@@ -939,6 +956,7 @@ function bet100kFunction() {
       modal.classList.remove('hide');
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     } else {
       winOrLoss.textContent = 'You Lost 100k Clicks!';
@@ -947,15 +965,17 @@ function bet100kFunction() {
       clicks -= 100000;
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     }
   }
 }
 
 function bet1mFunction() {
-  if (clicks >= 1000000) {
+  if (clicks >= 1000000 && readyForBet === true) {
     let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
+    readyForBet = false;
     if (number === 1) {
       clicks += 1000000;
       winOrLoss.textContent = 'You Won 1m Clicks!';
@@ -963,6 +983,7 @@ function bet1mFunction() {
       modal.classList.remove('hide');
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     } else {
       winOrLoss.textContent = 'You Lost 100 Clicks!';
@@ -971,16 +992,18 @@ function bet1mFunction() {
       clicks -= 1000000;
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     }
   }
 }
 
 function betHalfFunction() {
-  if (clicks > 1) {
+  if (clicks > 1 && readyForBet === true) {
     let startClicks = Math.floor(clicks);
     let betClicks = Math.floor(clicks / 2);
     let number = Math.floor(Math.random() * 2) + 1;
+    readyForBet = false;
     if (number === 1) {
       clicks += betClicks;
       winOrLoss.textContent = `You won ${betClicks} clicks!`;
@@ -988,6 +1011,7 @@ function betHalfFunction() {
       modal.classList.remove('hide');
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     } else {
       winOrLoss.textContent = `You lost ${betClicks} clicks!`;
@@ -996,15 +1020,17 @@ function betHalfFunction() {
       clicks -= betClicks;
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     }
   }
 }
 
 function betAllFunction() {
-  if (clicks > 0) {
+  if (clicks > 0 && readyForBet === true) {
     let betClicks = Math.floor(clicks);
     let number = Math.floor(Math.random() * 2) + 1;
+    readyForBet = false;
     if (number === 1) {
       clicks += betClicks;
       winOrLoss.textContent = `You won ${betClicks} clicks!`;
@@ -1012,6 +1038,7 @@ function betAllFunction() {
       modal.classList.remove('hide');
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     } else {
       winOrLoss.textContent = `You lost ${betClicks} clicks!`;
@@ -1020,6 +1047,7 @@ function betAllFunction() {
       clicks -= betClicks;
       setTimeout(() => {
         modal.classList.add('hide');
+        readyForBet = true;
       }, 2000);
     }
   }
