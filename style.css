@@ -87,10 +87,6 @@ body {
   transition: opacity 0.4s ease-in-out;
 }
 
-.btn:hover {
-  opacity: 0.85;
-}
-
 /* Footer */
 footer {
   display: flex;
@@ -148,7 +144,6 @@ footer {
 .bet-grid .btn {
   margin: 1rem 0;
 }
-
 /* Navbar */
 nav {
   height: 10vh;

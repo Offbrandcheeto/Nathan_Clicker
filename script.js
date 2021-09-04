@@ -54,6 +54,7 @@ const upgradeMultiplier = 3;
 const mainElement = document.getElementById('main-element');
 const clickMe = document.getElementById('click-me');
 const clickCount = document.getElementById('click-count');
+const betClickCount = document.getElementById('bet-click-count');
 const cpsCount = document.getElementById('cps-count');
 const clickAnimation = document.getElementById('click-animation');
 
@@ -102,6 +103,16 @@ const beerQuestion = document.getElementById('beer-question');
 
 const news = document.getElementById('news');
 const bitchHeading = document.getElementById('bitch-text');
+
+// Bet
+const bet10 = document.getElementById('bet10');
+const bet100 = document.getElementById('bet100');
+const bet1k = document.getElementById('bet1k');
+const bet10k = document.getElementById('bet10k');
+const bet100k = document.getElementById('bet100k');
+const bet1m = document.getElementById('bet1M');
+const betHalf = document.getElementById('bet-half');
+const betAll = document.getElementById('bet-all');
 
 bitchHeading.textContent = `welcome to nathan clicker!`;
 // 15
@@ -408,6 +419,7 @@ const updateGame = setInterval(() => {
   cpsCount.textContent = `Per Second: ${Math.round(cps * 10) / 10}`;
 
   clickCount.textContent = `Total Clicks: ${Math.floor(clicks)}`;
+  betClickCount.textContent = `Total Clicks: ${Math.floor(clicks)}`;
 
   heading1.textContent = `Cost: ${itemOnePrice} | +${itemOneCPS} Sec`;
   heading2.textContent = `Cost: ${itemTwoPrice} | +${itemTwoCPS} Sec`;
@@ -592,6 +604,54 @@ const updateGame = setInterval(() => {
   } else {
     mouseUpgrade.style.opacity = 1;
   }
+
+  if (clicks < 10) {
+    bet10.style.opacity = 0.7;
+  } else {
+    bet10.style.opacity = 1;
+  }
+
+  if (clicks < 100) {
+    bet100.style.opacity = 0.7;
+  } else {
+    bet100.style.opacity = 1;
+  }
+
+  if (clicks < 1000) {
+    bet1k.style.opacity = 0.7;
+  } else {
+    bet1k.style.opacity = 1;
+  }
+
+  if (clicks < 10000) {
+    bet10k.style.opacity = 0.7;
+  } else {
+    bet10k.style.opacity = 1;
+  }
+
+  if (clicks < 100000) {
+    bet100k.style.opacity = 0.7;
+  } else {
+    bet100k.style.opacity = 1;
+  }
+
+  if (clicks < 1000000) {
+    bet1m.style.opacity = 0.7;
+  } else {
+    bet1m.style.opacity = 1;
+  }
+
+  if (clicks < 2) {
+    betHalf.style.opacity = 0.7;
+  } else {
+    betHalf.style.opacity = 1;
+  }
+
+  if (clicks < 1) {
+    betAll.style.opacity = 0.7;
+  } else {
+    betAll.style.opacity = 1;
+  }
 }, 10);
 
 // Functions
@@ -766,6 +826,98 @@ function upgradeMouse() {
   }
 }
 
+// Betting
+
+function bet10Function() {
+  if (clicks >= 10) {
+    let number = Math.floor(Math.random() * 2) + 1;
+    if (number === 1) {
+      clicks += 10;
+    } else {
+      clicks -= 10;
+    }
+  }
+}
+
+function bet100Function() {
+  if (clicks >= 100) {
+    let number = Math.floor(Math.random() * 2) + 1;
+    if (number === 1) {
+      clicks += 100;
+    } else {
+      clicks -= 100;
+    }
+  }
+}
+
+function bet1kFunction() {
+  if (clicks >= 1000) {
+    let number = Math.floor(Math.random() * 2) + 1;
+    if (number === 1) {
+      clicks += 1000;
+    } else {
+      clicks -= 1000;
+    }
+  }
+}
+
+function bet10kFunction() {
+  if (clicks >= 10000) {
+    let number = Math.floor(Math.random() * 2) + 1;
+    if (number === 1) {
+      clicks += 10000;
+    } else {
+      clicks -= 10000;
+    }
+  }
+}
+
+function bet100kFunction() {
+  if (clicks >= 100000) {
+    let number = Math.floor(Math.random() * 2) + 1;
+    if (number === 1) {
+      clicks += 100000;
+    } else {
+      clicks -= 100000;
+    }
+  }
+}
+
+function bet1mFunction() {
+  if (clicks >= 1000000) {
+    let number = Math.floor(Math.random() * 2) + 1;
+    if (number === 1) {
+      clicks += 1000000;
+    } else {
+      clicks -= 1000000;
+    }
+  }
+}
+
+function betHalfFunction() {
+  if (clicks >= 2) {
+    let number = Math.floor(Math.random() * 2) + 1;
+    let betClicks = Math.floor(clicks / 2);
+    if (number === 1) {
+      clicks += betClicks;
+    } else {
+      clicks -= betClicks;
+    }
+  }
+}
+
+function betAllFunction() {
+  if (clicks >= 1) {
+    let number = Math.floor(Math.random() * 2) + 1;
+    let betClicks = Math.floor(clicks);
+    if (number === 1) {
+      clicks += betClicks;
+    } else {
+      clicks -= betClicks;
+    }
+  }
+}
+
 // Event Listeners
 mainElement.addEventListener('click', mainFunction);
 
@@ -775,7 +927,14 @@ item3.addEventListener('click', buyItemThree);
 item4.addEventListener('click', buyItemFour);
 item5.addEventListener('click', buyItemFive);
 
-// newSkinBtn.addEventListener('click', newSkin);
+bet10.addEventListener('click', bet10Function);
+bet100.addEventListener('click', bet100Function);
+bet1k.addEventListener('click', bet1kFunction);
+bet10k.addEventListener('click', bet10kFunction);
+bet100k.addEventListener('click', bet100kFunction);
+bet1m.addEventListener('click', bet1mFunction);
+betHalf.addEventListener('click', betHalfFunction);
+betAll.addEventListener('click', betAllFunction);
 
 weedUpgrade.addEventListener('click', upgradeItemWeed);
 pillsUpgrade.addEventListener('click', upgradeItemPills);
