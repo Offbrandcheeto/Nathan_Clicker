@@ -128,13 +128,13 @@ body {
 .btn {
   cursor: pointer;
   padding: 1rem 1.5rem;
-  border: none;
+  border: 3px solid var(--dark-color);
+  color: var(--dark-color);
   outline: none;
-  background-color: var(--dark-color);
-  color: #fff;
-  border-radius: 1rem;
+  background: none;
   font-size: 1.5rem;
   margin-top: 3rem;
+  text-decoration: none;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -143,22 +143,11 @@ body {
   width: 10%;
   text-align: center;
   margin: 0;
-  border-radius: 0;
-  background: none;
-  border: 3px solid var(--dark-color);
-  color: var(--dark-color);
-  text-transform: uppercase;
-  text-decoration: none;
 }
 
 .back-btn {
-  border-radius: 0;
-  background: none;
-  border: 3px solid var(--dark-color);
-  color: var(--dark-color);
-  text-transform: uppercase;
+  margin: 0;
   padding: 1.25rem 3.5rem;
-  text-decoration: none;
 }
 
 .switch-btn:hover {
