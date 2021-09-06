@@ -377,6 +377,10 @@ i:hover {
   .upgrades {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .btn {
+    font-size: 1.25rem;
+  }
 }
 
 @media (max-width: 1050px) {
