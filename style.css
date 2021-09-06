@@ -132,36 +132,35 @@ body {
   transition: transform 0.3s ease-in-out;
 }
 
-.btn:hover {
-  transform: scale(1.03);
-}
-
-.switch-btn,
-.back-btn {
-  transition: opacity 0.4s ease-in-out;
-}
-
 .switch-btn {
   min-width: 120px;
-  width: 8%;
+  width: 9%;
   text-align: center;
   margin: 0;
-  background: linear-gradient(315deg, var(--dark-color), #333);
+  border-radius: 0;
+  background: none;
+  border: 3px solid var(--dark-color);
+  color: var(--dark-color);
+  text-transform: uppercase;
   text-decoration: none;
 }
 
-.switch-btn:hover {
-  opacity: 0.85;
-  transform: scale(1);
-}
-
 .back-btn {
+  border-radius: 0;
+  background: none;
+  border: 3px solid var(--dark-color);
+  color: var(--dark-color);
+  text-transform: uppercase;
   padding: 1.25rem 3.5rem;
   text-decoration: none;
 }
 
-.back-btn:hover {
-  opacity: 0.85;
+.switch-btn:hover {
+  transform: scale(1) !important;
+}
+
+.btn:hover {
+  transform: scale(1.03);
 }
 
 /* Footer */
