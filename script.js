@@ -122,6 +122,7 @@ const results = document.getElementById('results');
 const modal = document.getElementById('modal');
 
 const saveBtn = document.getElementById('save-btn');
+const aboutBtn = document.getElementById('about-btn');
 
 bitchHeading.textContent = `welcome to nathan clicker!`;
 // 15
@@ -356,9 +357,6 @@ function getNewNews() {
 }
 
 function updateStorage() {
-  modal.classList.remove('hide');
-  winOrLoss.textContent = 'GAME SAVED!';
-  results.textContent = '';
   // Clicks / CPS / CPC
   localStorage.setItem('savedClicks', JSON.stringify(clicks));
   localStorage.setItem('savedCPS', JSON.stringify(cps));
@@ -408,11 +406,6 @@ function updateStorage() {
   localStorage.setItem('savedJointArea', JSON.stringify(jointAreaShow));
   localStorage.setItem('savedBongArea', JSON.stringify(bongAreaShow));
   localStorage.setItem('savedBeerArea', JSON.stringify(beerAreaShow));
-
-  // UI
-  setTimeout(() => {
-    modal.classList.add('hide');
-  }, 1500);
 }
 
 // Intervals
@@ -866,6 +859,7 @@ function bet10Function() {
         readyForBet = true;
       }, 2000);
     }
+    updateStorage();
   }
 }
 
@@ -893,6 +887,7 @@ function bet100Function() {
         readyForBet = true;
       }, 2000);
     }
+    updateStorage();
   }
 }
 
@@ -920,6 +915,7 @@ function bet1kFunction() {
         readyForBet = true;
       }, 2000);
     }
+    updateStorage();
   }
 }
 
@@ -947,6 +943,7 @@ function bet10kFunction() {
         readyForBet = true;
       }, 2000);
     }
+    updateStorage();
   }
 }
 
@@ -974,6 +971,7 @@ function bet100kFunction() {
         readyForBet = true;
       }, 2000);
     }
+    updateStorage();
   }
 }
 
@@ -1001,6 +999,7 @@ function bet1mFunction() {
         readyForBet = true;
       }, 2000);
     }
+    updateStorage();
   }
 }
 
@@ -1029,6 +1028,7 @@ function betHalfFunction() {
         readyForBet = true;
       }, 2000);
     }
+    updateStorage();
   }
 }
 
@@ -1056,6 +1056,7 @@ function betAllFunction() {
         readyForBet = true;
       }, 2000);
     }
+    updateStorage();
   }
 }
 
@@ -1091,3 +1092,13 @@ document.addEventListener('keydown', e => {
 });
 
 saveBtn.addEventListener('click', updateStorage);
+saveBtn.addEventListener('click', () => {
+  modal.classList.remove('hide');
+  winOrLoss.textContent = 'GAME SAVED!';
+  results.textContent = '';
+  setTimeout(() => {
+    modal.classList.add('hide');
+  }, 1500);
+});
+
+aboutBtn.addEventListener('click', updateStorage);
