@@ -28,12 +28,13 @@ body {
 
 /* About */
 .about {
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
-  padding: 1rem;
+  padding: 4rem;
 }
 
 .about h1 {
@@ -51,8 +52,13 @@ body {
 }
 
 .text {
-  margin: 3rem 0;
+  margin: 2rem 0;
   font-size: 1.5rem;
+  text-align: left;
+}
+
+.text:last-of-type {
+  margin-bottom: 4rem;
 }
 
 .news {
@@ -209,6 +215,10 @@ footer {
   align-items: center;
   text-align: center;
   flex-direction: column;
+}
+
+.bet-item:first-child {
+  border-right: 4px solid var(--dark-color);
 }
 
 .bet-grid {
