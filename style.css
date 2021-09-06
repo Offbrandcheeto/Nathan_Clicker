@@ -378,7 +378,7 @@ i:hover {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .btn {
+  .bet-item .btn {
     font-size: 1.25rem;
   }
 }
