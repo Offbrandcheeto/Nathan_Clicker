@@ -26,15 +26,36 @@ body {
   display: none !important;
 }
 
+/* About */
+.about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 1rem;
+}
+
+.about h1 {
+  border-bottom: 4px solid var(--dark-color);
+}
+
+.container {
+  max-width: 850px;
+}
+
 /* Font Sizes & Styles */
 .heading {
   text-transform: uppercase;
   font-weight: bold;
-  color: var(--dark-color);
+}
+
+.text {
+  margin: 3rem 0;
+  font-size: 1.5rem;
 }
 
 .news {
-  color: var(--dark-color);
   text-transform: uppercase;
   font-size: 1.5rem;
   padding: 1rem;
@@ -115,19 +136,32 @@ body {
   transform: scale(1.03);
 }
 
-.separate .btn {
+.switch-btn,
+.back-btn {
+  transition: opacity 0.4s ease-in-out;
+}
+
+.switch-btn {
   min-width: 120px;
   width: 8%;
   text-align: center;
   margin: 0;
   background: linear-gradient(315deg, var(--dark-color), #333);
   text-decoration: none;
-  transition: opacity 0.4s ease-in-out;
 }
 
-.separate .btn:hover {
+.switch-btn:hover {
   opacity: 0.85;
   transform: scale(1);
+}
+
+.back-btn {
+  padding: 1.25rem 3.5rem;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  opacity: 0.85;
 }
 
 /* Footer */

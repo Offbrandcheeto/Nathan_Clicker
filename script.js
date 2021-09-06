@@ -121,6 +121,8 @@ const winOrLoss = document.getElementById('win/loss');
 const results = document.getElementById('results');
 const modal = document.getElementById('modal');
 
+const saveBtn = document.getElementById('save-btn');
+
 bitchHeading.textContent = `welcome to nathan clicker!`;
 // 15
 const list = [
@@ -353,11 +355,10 @@ function getNewNews() {
   news.textContent = newsStory;
 }
 
-const updateLocalStorage = setInterval(() => {
-  updateStorage();
-}, 100);
-
 function updateStorage() {
+  modal.classList.remove('hide');
+  winOrLoss.textContent = 'GAME SAVED!';
+  results.textContent = '';
   // Clicks / CPS / CPC
   localStorage.setItem('savedClicks', JSON.stringify(clicks));
   localStorage.setItem('savedCPS', JSON.stringify(cps));
@@ -407,6 +408,11 @@ function updateStorage() {
   localStorage.setItem('savedJointArea', JSON.stringify(jointAreaShow));
   localStorage.setItem('savedBongArea', JSON.stringify(bongAreaShow));
   localStorage.setItem('savedBeerArea', JSON.stringify(beerAreaShow));
+
+  // UI
+  setTimeout(() => {
+    modal.classList.add('hide');
+  }, 1500);
 }
 
 // Intervals
@@ -1083,3 +1089,5 @@ document.addEventListener('keydown', e => {
     clearGame();
   }
 });
+
+saveBtn.addEventListener('click', updateStorage);
