@@ -17,7 +17,7 @@ let itemThreeNumber = 0;
 let itemFourNumber = 0;
 let itemFiveNumber = 0;
 
-let weedUpgradePrice = 200;
+let weedUpgradePrice = 100;
 let pillsUpgradePrice = 1000;
 let jointUpgradePrice = 5000;
 let bongUpgradePrice = 50000;
@@ -52,7 +52,7 @@ let readyForBet = true;
 
 // Const Vars
 const multiplier = 1.15;
-const upgradeMultiplier = 3;
+const upgradeMultiplier = 5;
 
 const mainElement = document.getElementById('main-element');
 const clickMe = document.getElementById('click-me');
@@ -139,7 +139,7 @@ const list = [
   'incoming teacher!',
   'my ass could click faster!',
   "don't look at me like that!",
-  "suck a dick if you don't click!",
+  'your search history is interesting!',
   'practice safe clicking!',
   'fuck life just click!',
 ];
@@ -350,6 +350,10 @@ function getRandomSaying() {
 const updateNews = setInterval(() => {
   getNewNews();
 }, 7500);
+
+const updateStorageTimer = setInterval(() => {
+  updateStorage();
+}, 10000);
 
 function getNewNews() {
   newsStory = `${newsList[Math.floor(Math.random() * newsList.length)]}`;
@@ -1084,7 +1088,6 @@ function betAllFunction() {
 function showSaveGame() {
   modal.classList.remove('hide');
   winOrLoss.textContent = 'Game Saved!';
-  results.textContent = 'Click the save button or "S" key!';
   setTimeout(() => {
     modal.classList.add('hide');
   }, 2500);
