@@ -1088,9 +1088,10 @@ function betAllFunction() {
 function showSaveGame() {
   modal.classList.remove('hide');
   winOrLoss.textContent = 'Game Saved!';
+  results.textContent = '';
   setTimeout(() => {
     modal.classList.add('hide');
-  }, 2500);
+  }, 2000);
 }
 
 // Event Listeners
@@ -1122,9 +1123,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Alt') {
     clearGame();
   }
-});
 
-document.addEventListener('keydown', e => {
   if (e.key === 's') {
     updateStorage();
     showSaveGame();
