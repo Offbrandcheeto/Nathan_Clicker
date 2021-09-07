@@ -151,8 +151,8 @@ const newsList = [
   'News: New element found in red hair could help cure cancer.',
   "News: School toilet clogged for first time since 69'.",
   'News: Overweight teens may not be eating enough, study finds.',
-  'News: Nathan clicker ranked #1 game in antarctica.',
-  'News: Kid struggles when asked how to spell "JHS".',
+  'News: Nathan clicker ranked #1 game in alabama.',
+  'News: Student struggles when asked how to spell "JHS".',
   'News: Nathan cole to enter local beauty pageant.',
   'News: Parker glas voted sexist ginger alive.',
   'News: Nathan cole torches 3rd graders in 800m.',
@@ -379,7 +379,6 @@ function updateStorage() {
   localStorage.setItem('savedItemThreeCPS', JSON.stringify(itemThreeCPS));
   localStorage.setItem('savedItemFourCPS', JSON.stringify(itemFourCPS));
   localStorage.setItem('savedItemFiveCPS', JSON.stringify(itemFiveCPS));
-
   // Upgrades
   localStorage.setItem('savedWeedUpgrade', JSON.stringify(weedUpgradePrice));
   localStorage.setItem('savedPillsUpgrade', JSON.stringify(pillsUpgradePrice));
@@ -387,7 +386,6 @@ function updateStorage() {
   localStorage.setItem('savedBongUpgrade', JSON.stringify(bongUpgradePrice));
   localStorage.setItem('savedBeerUpgrade', JSON.stringify(beerUpgradePrice));
   localStorage.setItem('savedMouseUpgrade', JSON.stringify(mouseUpgradePrice));
-
   // Upgrades
   localStorage.setItem('savedWeedUpgradeArea', JSON.stringify(showWeedUpgrade));
   localStorage.setItem(
@@ -400,7 +398,6 @@ function updateStorage() {
   );
   localStorage.setItem('savedBongUpgradeArea', JSON.stringify(showBongUpgrade));
   localStorage.setItem('savedBeerUpgradeArea', JSON.stringify(showBeerUpgrade));
-
   // Items
   localStorage.setItem('savedPillsArea', JSON.stringify(pillsAreaShow));
   localStorage.setItem('savedJointArea', JSON.stringify(jointAreaShow));
@@ -433,11 +430,35 @@ const updateGame = setInterval(() => {
   heading4.textContent = `Cost: ${itemFourPrice} | +${itemFourCPS} Sec`;
   heading5.textContent = `Cost: ${itemFivePrice} | +${itemFiveCPS} Sec`;
 
-  number1.textContent = `${itemOneNumber}`;
-  number2.textContent = `${itemTwoNumber}`;
-  number3.textContent = `${itemThreeNumber}`;
-  number4.textContent = `${itemFourNumber}`;
-  number5.textContent = `${itemFiveNumber}`;
+  if (itemOneNumber >= 1) {
+    number1.textContent = `${itemOneNumber}`;
+  } else {
+    number1.textContent = '';
+  }
+
+  if (itemTwoNumber >= 1) {
+    number2.textContent = `${itemTwoNumber}`;
+  } else {
+    number2.textContent = '';
+  }
+
+  if (itemThreeNumber >= 1) {
+    number3.textContent = `${itemThreeNumber}`;
+  } else {
+    number3.textContent = '';
+  }
+
+  if (itemFourNumber >= 1) {
+    number4.textContent = `${itemFourNumber}`;
+  } else {
+    number4.textContent = '';
+  }
+
+  if (itemFiveNumber >= 1) {
+    number5.textContent = `${itemFiveNumber}`;
+  } else {
+    number5.textContent = '';
+  }
 
   weedHeading.textContent = `Weed Upgrade | ${weedUpgradePrice}`;
   pillsHeading.textContent = `Pills Upgrade | ${pillsUpgradePrice}`;
@@ -1011,7 +1032,7 @@ function betHalfFunction() {
     readyForBet = false;
     if (number === 1) {
       clicks += betClicks;
-      winOrLoss.textContent = `You won ${betClicks} clicks!`;
+      winOrLoss.textContent = `You Won ${betClicks} Clicks!`;
       results.textContent = `${startClicks} --> ${(startClicks += betClicks)}`;
       modal.classList.remove('hide');
       setTimeout(() => {
@@ -1019,7 +1040,7 @@ function betHalfFunction() {
         readyForBet = true;
       }, 2000);
     } else {
-      winOrLoss.textContent = `You lost ${betClicks} clicks!`;
+      winOrLoss.textContent = `You Lost ${betClicks} Clicks!`;
       results.textContent = `${startClicks} --> ${(startClicks -= betClicks)}`;
       modal.classList.remove('hide');
       clicks -= betClicks;
@@ -1039,7 +1060,7 @@ function betAllFunction() {
     readyForBet = false;
     if (number === 1) {
       clicks += betClicks;
-      winOrLoss.textContent = `You won ${betClicks} clicks!`;
+      winOrLoss.textContent = `You Won ${betClicks} Clicks!`;
       results.textContent = `${betClicks} --> ${betClicks * 2}`;
       modal.classList.remove('hide');
       setTimeout(() => {
@@ -1047,7 +1068,7 @@ function betAllFunction() {
         readyForBet = true;
       }, 2000);
     } else {
-      winOrLoss.textContent = `You lost ${betClicks} clicks!`;
+      winOrLoss.textContent = `You Lost ${betClicks} Clicks!`;
       results.textContent = `${betClicks} --> 0`;
       modal.classList.remove('hide');
       clicks -= betClicks;
@@ -1058,6 +1079,15 @@ function betAllFunction() {
     }
     updateStorage();
   }
+}
+
+function showSaveGame() {
+  modal.classList.remove('hide');
+  winOrLoss.textContent = 'Game Saved!';
+  results.textContent = 'Click the save button or "S" key!';
+  setTimeout(() => {
+    modal.classList.add('hide');
+  }, 2500);
 }
 
 // Event Listeners
@@ -1091,14 +1121,16 @@ document.addEventListener('keydown', e => {
   }
 });
 
-saveBtn.addEventListener('click', updateStorage);
+document.addEventListener('keydown', e => {
+  if (e.key === 's') {
+    updateStorage();
+    showSaveGame();
+  }
+});
+
 saveBtn.addEventListener('click', () => {
-  modal.classList.remove('hide');
-  winOrLoss.textContent = 'GAME SAVED!';
-  results.textContent = '';
-  setTimeout(() => {
-    modal.classList.add('hide');
-  }, 1500);
+  updateStorage();
+  showSaveGame();
 });
 
 aboutBtn.addEventListener('click', updateStorage);
