@@ -699,7 +699,7 @@ function clearGame() {
   itemFourPrice = 12000;
   itemFivePrice = 130000;
 
-  weedUpgradePrice = 200;
+  weedUpgradePrice = 100;
   pillsUpgradePrice = 1000;
   jointUpgradePrice = 5000;
   bongUpgradePrice = 50000;
